@@ -1,7 +1,7 @@
 ﻿#region Copyright and License Information
 /**
- * 
- *            <git hub="https://github.com/edleyrocha"> 
+ *
+ *            <git hub="https://github.com/edleyrocha">
  *                GitHub Repositories
  *            </git>
  *            <mail address="contato@hoyler.com.br">
@@ -17,37 +17,36 @@ using System;
 namespace HOYLER.Data.SQLite
 {
     /// <summary>
-    /// # Class Convert (String to byte[]) and (bytes[] to String)
+    /// # Class Convert (String to byte[]) and (byts[] to String)
     /// </summary>
     public class SQLiteDatabaseHexPassword
     {
         /// <summary>
-        /// # Metodo Construtor Simples
+        /// # Metodo Construtor da Classe SQLiteDatabaseHexPassword()
         /// </summary>
         public SQLiteDatabaseHexPassword()
         {
-
         }
         /// <summary>
-        /// # Metodo Retona bytes de uma string
+        /// # Metodo Retona byts de uma string
         /// </summary>
-        /// <param name="str"> Parametro String </param>
-        /// <returns> Retorno Bytes </returns>
-        public static byte[] GetBytes(string str)
+        /// <param name="strs"> Parametro String </param>
+        /// <returns> Retorno byte[] </returns>
+        public static byte[] GetBytes(string strs)
         {
-            byte[] bytes = new byte[str.Length * sizeof(char)];
-            System.Buffer.BlockCopy(str.ToCharArray(), 0, bytes, 0, bytes.Length);
+            byte[] bytes = new byte[strs.Length * sizeof(char)];
+            System.Buffer.BlockCopy(strs.ToCharArray(), 0, bytes, 0, bytes.Length);
             return bytes;
         }
         /// <summary>
         /// # Metodo Retona string de um array byte
         /// </summary>
-        /// <param name="bytes"> Parametro Bytes </param>
+        /// <param name="byts"> Parametro Bytes </param>
         /// <returns> Retorna String </returns>
-        public static string GetString(byte[] bytes)
+        public static string GetString(byte[] byts)
         {
-            char[] chars = new char[bytes.Length / sizeof(char)];
-            System.Buffer.BlockCopy(bytes, 0, chars, 0, bytes.Length);
+            char[] chars = new char[byts.Length / sizeof(char)];
+            System.Buffer.BlockCopy(byts, 0, chars, 0, byts.Length);
             return new string(chars);
         }
     }

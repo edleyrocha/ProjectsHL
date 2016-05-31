@@ -28,63 +28,78 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnCriar = new System.Windows.Forms.Button();
-            this.textBox_Caminho = new System.Windows.Forms.TextBox();
+            this.btn_CriarBancoA = new System.Windows.Forms.Button();
+            this.textBox_CaminhoCriar = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.comboBox_Tamanho = new System.Windows.Forms.ComboBox();
+            this.btn_CriarBancoB = new System.Windows.Forms.Button();
+            this.btn_BuscarBanco = new System.Windows.Forms.Button();
             this.checkBox_Caminho = new System.Windows.Forms.CheckBox();
-            this.checkBox_Versao = new System.Windows.Forms.CheckBox();
-            this.checkBox_TamanhoDB = new System.Windows.Forms.CheckBox();
-            this.comboBox_Versao = new System.Windows.Forms.ComboBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.checkBox_Senha = new System.Windows.Forms.CheckBox();
+            this.textBox_Senha = new System.Windows.Forms.TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.comboBox_Tipo_Backup = new System.Windows.Forms.ComboBox();
+            this.btn_Backup = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btn_ir_Backup = new System.Windows.Forms.Button();
+            this.textBox_CaminhoBackup = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btnCriar
+            // btn_CriarBancoA
             // 
-            this.btnCriar.Location = new System.Drawing.Point(333, 197);
-            this.btnCriar.Name = "btnCriar";
-            this.btnCriar.Size = new System.Drawing.Size(75, 23);
-            this.btnCriar.TabIndex = 0;
-            this.btnCriar.Text = "Criar";
-            this.btnCriar.UseVisualStyleBackColor = true;
-            this.btnCriar.Click += new System.EventHandler(this.btnCriar_Click);
+            this.btn_CriarBancoA.Location = new System.Drawing.Point(7, 117);
+            this.btn_CriarBancoA.Name = "btn_CriarBancoA";
+            this.btn_CriarBancoA.Size = new System.Drawing.Size(96, 23);
+            this.btn_CriarBancoA.TabIndex = 0;
+            this.btn_CriarBancoA.Text = "Criar DB Modo A";
+            this.btn_CriarBancoA.UseVisualStyleBackColor = true;
+            this.btn_CriarBancoA.Click += new System.EventHandler(this.btn_CriarBancoA_Click);
             // 
-            // textBox_Caminho
+            // textBox_CaminhoCriar
             // 
-            this.textBox_Caminho.Location = new System.Drawing.Point(7, 42);
-            this.textBox_Caminho.Name = "textBox_Caminho";
-            this.textBox_Caminho.Size = new System.Drawing.Size(234, 20);
-            this.textBox_Caminho.TabIndex = 2;
-            this.textBox_Caminho.Text = "C:\\SQLite\\SQLiteDEMO.db3";
+            this.textBox_CaminhoCriar.Location = new System.Drawing.Point(7, 42);
+            this.textBox_CaminhoCriar.Name = "textBox_CaminhoCriar";
+            this.textBox_CaminhoCriar.Size = new System.Drawing.Size(207, 20);
+            this.textBox_CaminhoCriar.TabIndex = 2;
+            this.textBox_CaminhoCriar.Text = "C:\\SQLite\\SQLiteDEMO.db3";
+            this.textBox_CaminhoCriar.Click += new System.EventHandler(this.textBox_CaminhoCriar_Click);
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.checkBox1);
-            this.groupBox1.Controls.Add(this.comboBox_Tamanho);
+            this.groupBox1.Controls.Add(this.btn_CriarBancoB);
+            this.groupBox1.Controls.Add(this.btn_BuscarBanco);
             this.groupBox1.Controls.Add(this.checkBox_Caminho);
-            this.groupBox1.Controls.Add(this.checkBox_Versao);
-            this.groupBox1.Controls.Add(this.checkBox_TamanhoDB);
-            this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Controls.Add(this.comboBox_Versao);
-            this.groupBox1.Controls.Add(this.textBox_Caminho);
-            this.groupBox1.Controls.Add(this.btnCriar);
-            this.groupBox1.Location = new System.Drawing.Point(71, 51);
+            this.groupBox1.Controls.Add(this.checkBox_Senha);
+            this.groupBox1.Controls.Add(this.textBox_Senha);
+            this.groupBox1.Controls.Add(this.textBox_CaminhoCriar);
+            this.groupBox1.Controls.Add(this.btn_CriarBancoA);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(437, 241);
+            this.groupBox1.Size = new System.Drawing.Size(253, 173);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criar DB";
             // 
-            // comboBox_Tamanho
+            // btn_CriarBancoB
             // 
-            this.comboBox_Tamanho.FormattingEnabled = true;
-            this.comboBox_Tamanho.Location = new System.Drawing.Point(7, 91);
-            this.comboBox_Tamanho.Name = "comboBox_Tamanho";
-            this.comboBox_Tamanho.Size = new System.Drawing.Size(129, 21);
-            this.comboBox_Tamanho.TabIndex = 10;
-            this.comboBox_Tamanho.Text = "Escolha o Tamanho";
+            this.btn_CriarBancoB.Location = new System.Drawing.Point(118, 117);
+            this.btn_CriarBancoB.Name = "btn_CriarBancoB";
+            this.btn_CriarBancoB.Size = new System.Drawing.Size(96, 23);
+            this.btn_CriarBancoB.TabIndex = 11;
+            this.btn_CriarBancoB.Text = "Criar DB Modo B";
+            this.btn_CriarBancoB.UseVisualStyleBackColor = true;
+            this.btn_CriarBancoB.Click += new System.EventHandler(this.btn_CriarBancoB_Click);
+            // 
+            // btn_BuscarBanco
+            // 
+            this.btn_BuscarBanco.Location = new System.Drawing.Point(220, 42);
+            this.btn_BuscarBanco.Name = "btn_BuscarBanco";
+            this.btn_BuscarBanco.Size = new System.Drawing.Size(20, 20);
+            this.btn_BuscarBanco.TabIndex = 10;
+            this.btn_BuscarBanco.Text = "ir";
+            this.btn_BuscarBanco.UseVisualStyleBackColor = true;
+            this.btn_BuscarBanco.Click += new System.EventHandler(this.btn_BuscarBanco_Click);
             // 
             // checkBox_Caminho
             // 
@@ -95,69 +110,96 @@
             this.checkBox_Caminho.TabIndex = 9;
             this.checkBox_Caminho.Text = "Definir Caminho ( C:\\SQLite.db3 )";
             this.checkBox_Caminho.UseVisualStyleBackColor = true;
-            this.checkBox_Caminho.CheckedChanged += new System.EventHandler(this.checkBox_Caminho_CheckedChanged);
+            this.checkBox_Caminho.CheckStateChanged += new System.EventHandler(this.checkBox_Caminho_CheckStateChanged);
             // 
-            // checkBox_Versao
+            // checkBox_Senha
             // 
-            this.checkBox_Versao.AutoSize = true;
-            this.checkBox_Versao.Location = new System.Drawing.Point(246, 19);
-            this.checkBox_Versao.Name = "checkBox_Versao";
-            this.checkBox_Versao.Size = new System.Drawing.Size(92, 17);
-            this.checkBox_Versao.TabIndex = 8;
-            this.checkBox_Versao.Text = "Definir Versão";
-            this.checkBox_Versao.UseVisualStyleBackColor = true;
-            this.checkBox_Versao.CheckedChanged += new System.EventHandler(this.checkBox_Versao_CheckedChanged);
+            this.checkBox_Senha.AutoSize = true;
+            this.checkBox_Senha.Location = new System.Drawing.Point(7, 68);
+            this.checkBox_Senha.Name = "checkBox_Senha";
+            this.checkBox_Senha.Size = new System.Drawing.Size(90, 17);
+            this.checkBox_Senha.TabIndex = 8;
+            this.checkBox_Senha.Text = "Definir Senha";
+            this.checkBox_Senha.UseVisualStyleBackColor = true;
+            this.checkBox_Senha.CheckedChanged += new System.EventHandler(this.checkBox_Senha_CheckedChanged);
             // 
-            // checkBox_TamanhoDB
+            // textBox_Senha
             // 
-            this.checkBox_TamanhoDB.AutoSize = true;
-            this.checkBox_TamanhoDB.Location = new System.Drawing.Point(7, 68);
-            this.checkBox_TamanhoDB.Name = "checkBox_TamanhoDB";
-            this.checkBox_TamanhoDB.Size = new System.Drawing.Size(129, 17);
-            this.checkBox_TamanhoDB.TabIndex = 7;
-            this.checkBox_TamanhoDB.Text = "Definir Tamanho (MB)";
-            this.checkBox_TamanhoDB.UseVisualStyleBackColor = true;
-            this.checkBox_TamanhoDB.CheckedChanged += new System.EventHandler(this.checkBox_TamanhoDB_CheckedChanged);
+            this.textBox_Senha.Location = new System.Drawing.Point(7, 91);
+            this.textBox_Senha.Name = "textBox_Senha";
+            this.textBox_Senha.Size = new System.Drawing.Size(207, 20);
+            this.textBox_Senha.TabIndex = 2;
+            this.textBox_Senha.Text = "Senha";
+            this.textBox_Senha.Click += new System.EventHandler(this.textBox_Senha_Click);
             // 
-            // comboBox_Versao
+            // groupBox2
             // 
-            this.comboBox_Versao.FormattingEnabled = true;
-            this.comboBox_Versao.Items.AddRange(new object[] {
-            "SQLite2x (Default)",
-            "SQLite3x"});
-            this.comboBox_Versao.Location = new System.Drawing.Point(246, 42);
-            this.comboBox_Versao.Name = "comboBox_Versao";
-            this.comboBox_Versao.Size = new System.Drawing.Size(135, 21);
-            this.comboBox_Versao.TabIndex = 4;
-            this.comboBox_Versao.Text = "Escolha Versão";
+            this.groupBox2.Controls.Add(this.comboBox_Tipo_Backup);
+            this.groupBox2.Controls.Add(this.btn_Backup);
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.btn_ir_Backup);
+            this.groupBox2.Controls.Add(this.textBox_CaminhoBackup);
+            this.groupBox2.Location = new System.Drawing.Point(4, 191);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(248, 91);
+            this.groupBox2.TabIndex = 4;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Criar Backup";
             // 
-            // checkBox1
+            // comboBox_Tipo_Backup
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(142, 68);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(95, 17);
-            this.checkBox1.TabIndex = 11;
-            this.checkBox1.Text = "UTF Encoding";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.comboBox_Tipo_Backup.FormattingEnabled = true;
+            this.comboBox_Tipo_Backup.Items.AddRange(new object[] {
+            "Mover Banco de Dados",
+            "Copiar Banco de Dados"});
+            this.comboBox_Tipo_Backup.Location = new System.Drawing.Point(6, 58);
+            this.comboBox_Tipo_Backup.Name = "comboBox_Tipo_Backup";
+            this.comboBox_Tipo_Backup.Size = new System.Drawing.Size(152, 21);
+            this.comboBox_Tipo_Backup.TabIndex = 5;
+            this.comboBox_Tipo_Backup.Text = "Escolha o tipo de Backup";
             // 
-            // comboBox1
+            // btn_Backup
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "UTF 8 (Default)",
-            "UTF 16"});
-            this.comboBox1.Location = new System.Drawing.Point(142, 91);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(99, 21);
-            this.comboBox1.TabIndex = 4;
-            this.comboBox1.Text = "Escolha Encoding";
+            this.btn_Backup.Location = new System.Drawing.Point(164, 58);
+            this.btn_Backup.Name = "btn_Backup";
+            this.btn_Backup.Size = new System.Drawing.Size(75, 23);
+            this.btn_Backup.TabIndex = 4;
+            this.btn_Backup.Text = "Backup";
+            this.btn_Backup.UseVisualStyleBackColor = true;
+            this.btn_Backup.Click += new System.EventHandler(this.btn_Backup_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(107, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Arquivo para Backup";
+            // 
+            // btn_ir_Backup
+            // 
+            this.btn_ir_Backup.Location = new System.Drawing.Point(219, 32);
+            this.btn_ir_Backup.Name = "btn_ir_Backup";
+            this.btn_ir_Backup.Size = new System.Drawing.Size(20, 20);
+            this.btn_ir_Backup.TabIndex = 2;
+            this.btn_ir_Backup.Text = "ir";
+            this.btn_ir_Backup.UseVisualStyleBackColor = true;
+            this.btn_ir_Backup.Click += new System.EventHandler(this.btn_ir_Backup_Click);
+            // 
+            // textBox_CaminhoBackup
+            // 
+            this.textBox_CaminhoBackup.Location = new System.Drawing.Point(6, 32);
+            this.textBox_CaminhoBackup.Name = "textBox_CaminhoBackup";
+            this.textBox_CaminhoBackup.Size = new System.Drawing.Size(207, 20);
+            this.textBox_CaminhoBackup.TabIndex = 0;
             // 
             // frmCriarBancoDeDados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(565, 389);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -166,21 +208,27 @@
             this.Text = "DEMO Criar Banco de Dados Exemplo";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button btnCriar;
-        private System.Windows.Forms.TextBox textBox_Caminho;
+        private System.Windows.Forms.Button btn_CriarBancoA;
+        private System.Windows.Forms.TextBox textBox_CaminhoCriar;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ComboBox comboBox_Versao;
-        private System.Windows.Forms.CheckBox checkBox_TamanhoDB;
-        private System.Windows.Forms.CheckBox checkBox_Versao;
+        private System.Windows.Forms.CheckBox checkBox_Senha;
         private System.Windows.Forms.CheckBox checkBox_Caminho;
-        private System.Windows.Forms.ComboBox comboBox_Tamanho;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox textBox_Senha;
+        private System.Windows.Forms.Button btn_BuscarBanco;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button btn_Backup;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btn_ir_Backup;
+        private System.Windows.Forms.TextBox textBox_CaminhoBackup;
+        private System.Windows.Forms.ComboBox comboBox_Tipo_Backup;
+        private System.Windows.Forms.Button btn_CriarBancoB;
     }
 }

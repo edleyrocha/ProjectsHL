@@ -18,86 +18,143 @@ namespace CRUD.WFD.SQLite
         public frmCriarBancoDeDados()
         {
             InitializeComponent();
-            comboBox_Versao.Enabled = !comboBox_Versao.Enabled;
-            comboBox_Tamanho.Enabled = !comboBox_Tamanho.Enabled;
-            checkBox_Caminho.Checked = !checkBox_Caminho.Checked;
-           
-         
+            textBox_CaminhoCriar.Enabled = !textBox_CaminhoCriar.Enabled;
+            textBox_Senha.Enabled = !textBox_Senha.Enabled;
+            checkBox_Senha.Enabled = !checkBox_Senha.Enabled;
+            btn_BuscarBanco.Enabled = !btn_BuscarBanco.Enabled;
+            btn_CriarBancoA.Enabled = !btn_CriarBancoA.Enabled;
+            btn_CriarBancoB.Enabled = !btn_CriarBancoB.Enabled;
         }
-        private void checkBox_Versao_CheckedChanged(object sender, EventArgs e)
-        {
-            bool status;
-            status = comboBox_Versao.Enabled;
 
-            if (status == true)
+        private void checkBox_Caminho_CheckStateChanged(object sender, EventArgs e)
+        {
+            textBox_CaminhoCriar.Enabled = !textBox_CaminhoCriar.Enabled;
+            textBox_CaminhoCriar.Text = @"C:\SQLite\SQLiteDEMO.db3";
+
+            if (checkBox_Caminho.Checked)
             {
-                comboBox_Versao.Enabled = !status;
+                checkBox_Senha.Enabled = true;
+                btn_CriarBancoA.Enabled = true;
+                btn_CriarBancoB.Enabled = true;
+                btn_BuscarBanco.Enabled = true;
+
+            }
+            else if (!checkBox_Caminho.Checked)
+            {
+                checkBox_Senha.Checked = false;
+                checkBox_Senha.Enabled = false;
+                btn_CriarBancoA.Enabled = false;
+                btn_CriarBancoB.Enabled = false;
+                btn_BuscarBanco.Enabled = false;
+            }
+        }
+
+        private void checkBox_Senha_CheckedChanged(object sender, EventArgs e)
+        {
+            textBox_Senha.Text = ("Senha...");
+            textBox_Senha.Enabled = !textBox_Senha.Enabled;
+
+        }
+
+        private void textBox_Senha_Click(object sender, EventArgs e)
+        {
+            textBox_Senha.Text = String.Empty;
+        }
+
+        private void textBox_CaminhoCriar_Click(object sender, EventArgs e)
+        {
+            textBox_CaminhoCriar.Text = String.Empty;
+        }
+
+        private void btn_Backup_Click(object sender, EventArgs e)
+        {
+            var backupIndex = comboBox_Tipo_Backup.SelectedIndex;
+            if (backupIndex == 0)
+            {
+                var patchBackup = textBox_CaminhoBackup.Text;
+                var msgResult = HOYLER.Data.SQLite.SQLiteDatabaseBackup.BackupDatabaseCopyDB(patchBackup, true);
+                MessageBox.Show(msgResult);
+            }
+            else if (backupIndex == 1)
+            {
+                var patchBackup = textBox_CaminhoBackup.Text;
+                var msgResult = HOYLER.Data.SQLite.SQLiteDatabaseBackup.BackupDatabaseCopyDB(patchBackup, false);
+                MessageBox.Show(msgResult);
             }
             else
             {
-                comboBox_Versao.Enabled = !status;
-            };
+                MessageBox.Show("xxxx");
+            }
         }
- 
 
-
-        private void checkBox_TamanhoDB_CheckedChanged(object sender, EventArgs e)
+        private void btn_ir_Backup_Click(object sender, EventArgs e)
         {
-            bool status;
-            status = comboBox_Tamanho.Enabled;
+            var openFileDialog = (new OpenFileDialog());
+            openFileDialog.Title = "Localizar Arquivos de Banco de Dados SQLite *.db3";
+            openFileDialog.InitialDirectory = (@"C:\");
+            openFileDialog.Filter = "db3 files (*.db3)|*.db3|All files (*.*)|*.*";
+            openFileDialog.DefaultExt = ("db3");
+            openFileDialog.CheckFileExists = (true);
+            openFileDialog.CheckPathExists = (true);
+            openFileDialog.Multiselect = (false);
+            openFileDialog.ReadOnlyChecked = (true);
+            openFileDialog.ShowReadOnly = (true);
+            openFileDialog.AutoUpgradeEnabled = (true);
+            openFileDialog.ShowDialog();
+            textBox_CaminhoBackup.Text = openFileDialog.FileName;
+        }
 
-            if (status == true)
+        private void btn_CriarBancoA_Click(object sender, EventArgs e)
+        {
+            var PatchA = (textBox_CaminhoCriar.Text);
+            var passwdA = (textBox_Senha.Text);
+            var passwdAHex = (HOYLER.Data.SQLite.SQLiteDatabaseHexPassword.GetBytes(passwdA));
+            var StringConn = (HOYLER.Data.SQLite.SQLiteDatabaseConnectionString.GetConnectionString(PatchA, passwdAHex));
+            var createFileA = (HOYLER.Data.SQLite.SQLiteDatabaseCreate.DatabaseCreateFile(StringConn));
+            var msgTitle = ("Banco de Dados");
+            var msgText = ("Criado com Sucesso");
+            if (createFileA == "OK")
             {
-                comboBox_Tamanho.Enabled = !status;
+                MessageBox.Show(msgText, msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                comboBox_Tamanho.Enabled = !status;
-            };
-
-        }
-
-        private void textBox_Tamanho_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != (char)8)
-            {
-                e.Handled = true;
+                MessageBox.Show(createFileA, msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void checkBox_Caminho_CheckedChanged(object sender, EventArgs e)
+        private void btn_CriarBancoB_Click(object sender, EventArgs e)
         {
-            textBox_Caminho.Enabled = !textBox_Caminho.Enabled;
-            checkBox_Versao.Enabled = textBox_Caminho.Enabled;
-            checkBox_TamanhoDB.Enabled = textBox_Caminho.Enabled;
+            var PatchB = (textBox_CaminhoCriar.Text);
+            var passwdB = (textBox_Senha.Text);
+            var passwdBHex = (HOYLER.Data.SQLite.SQLiteDatabaseHexPassword.GetBytes(passwdB));
+
+            var createFileB = (HOYLER.Data.SQLite.SQLiteDatabaseCreate.DatabaseCreateFile(PatchB, passwdBHex));
+            var msgTitle = ("Banco de Dados");
+            var msgText = ("Criado com Sucesso");
+            if (createFileB == "OK")
+            {
+                MessageBox.Show(msgText, msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show(createFileB, msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        private void btnCriar_Click(object sender, EventArgs e)
+        private void btn_BuscarBanco_Click(object sender, EventArgs e)
         {
-            var SDC = new HOYLER.Data.SQLite.SQLiteDatabaseCreate();
-            var myHexPassword = (HOYLER.Data.SQLite.SQLiteDatabaseHexPassword.GetBytes("123456789"));
-            var myDataSource = (System.IO.Path.Combine((AppDomain.CurrentDomain.BaseDirectory.ToString()), ("HOYLER.Connection.db3")).ToString());
-            //var myDataSource = AppDomain.CurrentDomain.BaseDirectory.ToString() + "HOYLER.Connection.db3";
-            var msg = SDC.DatabaseCreateFile(myDataSource, myHexPassword);
-            MessageBox.Show(msg);
-          
+            var saveFileDialog = new SaveFileDialog();
 
-          //  var c = new HOYLER.Data.SQLite.SQLiteConnectionDEFAULT();
-          //  var result = c.CreateDatabaseDEFAULTaa();
-          //if (result== "OK")
-          //{
-          //    MessageBox.Show(result,"Sucessso");
-          //}
-          //else
-          //{
-          //    MessageBox.Show(result);
-          //}
+            var openFileDialog = (new OpenFileDialog());
+            saveFileDialog.Title = "Cria Arquivo de Banco de Dados SQLite *.db3";
+            saveFileDialog.InitialDirectory = (@"C:\");
+            saveFileDialog.Filter = "db3 files (*.db3)|*.db3|All files (*.*)|*.*";
+            saveFileDialog.DefaultExt = ("db3");
+            saveFileDialog.CheckPathExists = (true);
+            saveFileDialog.AutoUpgradeEnabled = (true);
+            saveFileDialog.ShowDialog();
+            textBox_CaminhoCriar.Text = saveFileDialog.FileName;
         }
-
-
-
-
-
-
     }
 }

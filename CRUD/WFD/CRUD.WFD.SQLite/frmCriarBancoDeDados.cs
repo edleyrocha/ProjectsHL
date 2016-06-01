@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-//using System.HOYLER.Data;
+using HOYLER.Data.SQLite;
 
 
 namespace CRUD.WFD.SQLite
@@ -108,9 +108,9 @@ namespace CRUD.WFD.SQLite
         {
             var PatchA = (textBox_CaminhoCriar.Text);
             var passwdA = (textBox_Senha.Text);
-            var passwdAHex = (HOYLER.Data.SQLite.SQLiteDatabaseHexPassword.GetBytes(passwdA));
-            var StringConn = (HOYLER.Data.SQLite.SQLiteDatabaseConnectionString.GetConnectionString(PatchA, passwdAHex));
-            var createFileA = (HOYLER.Data.SQLite.SQLiteDatabaseCreate.DatabaseCreateFile(StringConn));
+            var passwdAHex = (HOYLER.Data.SQLite.SQLiteConversor.H_GetBytes(passwdA));
+            var StringConn = (HOYLER.Data.SQLite.H_SQLiteDatabaseConnectionString.GetConnectionString(PatchA, passwdAHex));
+            var createFileA = (HOYLER.Data.SQLite.SQLiteDatabaseCreate.H_DatabaseCreateFile(StringConn));
             var msgTitle = ("Banco de Dados");
             var msgText = ("Criado com Sucesso");
             if (createFileA == "OK")
@@ -127,9 +127,8 @@ namespace CRUD.WFD.SQLite
         {
             var PatchB = (textBox_CaminhoCriar.Text);
             var passwdB = (textBox_Senha.Text);
-            var passwdBHex = (HOYLER.Data.SQLite.SQLiteDatabaseHexPassword.GetBytes(passwdB));
-
-            var createFileB = (HOYLER.Data.SQLite.SQLiteDatabaseCreate.DatabaseCreateFile(PatchB, passwdBHex));
+            var passwdBHex = (HOYLER.Data.SQLite.SQLiteConversor.H_GetBytes(passwdB));
+            var createFileB = (HOYLER.Data.SQLite.SQLiteDatabaseCreate.H_DatabaseCreateFile(PatchB, passwdBHex));
             var msgTitle = ("Banco de Dados");
             var msgText = ("Criado com Sucesso");
             if (createFileB == "OK")

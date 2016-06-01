@@ -17,36 +17,36 @@ using System;
 namespace HOYLER.Data.SQLite
 {
     /// <summary>
-    /// # Class Convert (String to byte[]) and (byts[] to String)
+    /// #H Class Convert (String to byte[]) and (mybyts[] to String)
     /// </summary>
-    public class SQLiteDatabaseHexPassword
+    public class SQLiteConversor
     {
         /// <summary>
-        /// # Metodo Construtor da Classe SQLiteDatabaseHexPassword()
+        /// #H Metodo Construtor da Classe H_SQLiteDatabaseHexPassword()
         /// </summary>
-        public SQLiteDatabaseHexPassword()
+        public SQLiteConversor()
         {
         }
         /// <summary>
-        /// # Metodo Retona byts de uma string
+        /// #H Metodo Retona mybyts de uma string
         /// </summary>
-        /// <param name="strs"> Parametro String </param>
+        /// <param name="myString"> Parametro String </param>
         /// <returns> Retorno byte[] </returns>
-        public static byte[] GetBytes(string strs)
+        public static byte[] H_GetBytes(string myString)
         {
-            byte[] bytes = new byte[strs.Length * sizeof(char)];
-            System.Buffer.BlockCopy(strs.ToCharArray(), 0, bytes, 0, bytes.Length);
+            byte[] bytes = new byte[myString.Length * sizeof(char)];
+            System.Buffer.BlockCopy(myString.ToCharArray(), 0, bytes, 0, bytes.Length);
             return bytes;
         }
         /// <summary>
-        /// # Metodo Retona string de um array byte
+        /// #H Metodo Retona string de um array byte
         /// </summary>
-        /// <param name="byts"> Parametro Bytes </param>
+        /// <param name="mybyts"> Parametro Bytes </param>
         /// <returns> Retorna String </returns>
-        public static string GetString(byte[] byts)
+        public static string H_GetString(byte[] mybyts)
         {
-            char[] chars = new char[byts.Length / sizeof(char)];
-            System.Buffer.BlockCopy(byts, 0, chars, 0, byts.Length);
+            char[] chars = new char[mybyts.Length / sizeof(char)];
+            System.Buffer.BlockCopy(mybyts, 0, chars, 0, mybyts.Length);
             return new string(chars);
         }
     }

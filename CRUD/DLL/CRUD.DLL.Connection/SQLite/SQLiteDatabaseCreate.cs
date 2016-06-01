@@ -18,22 +18,22 @@ using System.Data.SQLite;
 namespace HOYLER.Data.SQLite
 {
     /// <summary>
-    /// # Classe SQLiteDatabaseCreate
+    /// #H Classe H_SQLiteDatabaseCreateDB
     /// </summary>
     public class SQLiteDatabaseCreate
     {
         /// <summary>
-        /// # Metodo Contrutor da Classe SQLiteDatabaseCreate()
+        /// #H Metodo Contrutor da Classe H_SQLiteDatabaseCreateDB()
         /// </summary>
         public SQLiteDatabaseCreate()
         {
         }
         /// <summary>
-        /// # String for SQLiteConnection
+        /// #H String for SQLiteConnection
         /// </summary>
         private static SQLiteConnectionStringBuilder _SQLiteString = (new SQLiteConnectionStringBuilder());
         /// <summary>
-        /// # Metodo Configure Default SQLite ConnectionString
+        /// #H Metodo Configure Default SQLite ConnectionString
         /// </summary>
         private static void _ConfigureDefaultSQLiteString()
         {
@@ -48,13 +48,14 @@ namespace HOYLER.Data.SQLite
             _SQLiteString.Flags = (System.Data.SQLite.SQLiteConnectionFlags.LogAll);
         }
         /// <summary>
-        /// # Metodo para Criar Banco de Dados
+        /// #H Metodo para Criar Banco de Dados
         /// </summary>
         /// <param name="myDataSource">Caminho e Name para Banco de Dados</param>
         /// <param name="myHexPassword">Senha para Banco de dados</param>
         /// <returns>Retorna string</returns>
-        public static string DatabaseCreateFile(String myDataSource, byte[] myHexPassword)
+        public static string H_DatabaseCreateFile(String myDataSource, byte[] myHexPassword)
         {
+            //Default Return
             var myReturn = (String.Empty);
 
             //Check if Diretory Exists
@@ -76,7 +77,7 @@ namespace HOYLER.Data.SQLite
                         // Set Password if Exist
                         _SQLiteString.HexPassword = (myHexPassword);
                         // Criar Banco de Dados (Abrir e Fechar)
-                        using (var SQLiteConn = (new SQLiteConnection(_SQLiteString.ConnectionString)))
+                        using (var SQLiteConn = (new System.Data.SQLite.SQLiteConnection(_SQLiteString.ConnectionString)))
                         {
                             SQLiteConn.Open();
                             SQLiteConn.Close();
@@ -100,16 +101,14 @@ namespace HOYLER.Data.SQLite
             return (myReturn);
         }
         /// <summary>
-        /// # Metodo para Criar Banco de Dados
+        /// #H Metodo para Criar Banco de Dados
         /// </summary>
         /// <param name="myStringBuilder"> SQLiteConnectionStringBuilder como Parametro</param>
         /// <returns>Retorna string</returns>
-        public static string DatabaseCreateFile(SQLiteConnectionStringBuilder myStringBuilder)
+        public static string H_DatabaseCreateFile(SQLiteConnectionStringBuilder myStringBuilder)
         {
+            //Default Return
             var myReturn = (String.Empty);
-
-            //var myDatabasePatch = (System.IO.Path.GetDirectoryName(myStringBuilder.DataSource));
-            //var myDatabaseFile = (System.IO.Path.GetFileName(myStringBuilder.DataSource));
 
             //Check if Diretory Exists
             var myDatabaseDiretoryExist = (System.IO.Directory.Exists(System.IO.Path.GetDirectoryName(myStringBuilder.DataSource)));
@@ -123,7 +122,7 @@ namespace HOYLER.Data.SQLite
                 {
                     try
                     {
-                        using (var SQLiteConn = (new SQLiteConnection(myStringBuilder.ConnectionString)))
+                        using (var SQLiteConn = (new System.Data.SQLite.SQLiteConnection(myStringBuilder.ConnectionString)))
                         {
                             SQLiteConn.Open();
                             SQLiteConn.Close();

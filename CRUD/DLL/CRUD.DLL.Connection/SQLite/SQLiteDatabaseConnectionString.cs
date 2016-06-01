@@ -18,16 +18,16 @@ using System.Data.SQLite;
 namespace HOYLER.Data.SQLite
 {
     /// <summary>
-    /// #Classe SQLiteDatabaseConnectionString
+    /// #H Classe H_SQLiteDatabaseConnectionString
     /// </summary>
-    public static class SQLiteDatabaseConnectionString
+    public static class H_SQLiteDatabaseConnectionString
     {
         /// <summary>
-        /// # String for SQLiteConnection
+        /// #H String for SQLiteConnection
         /// </summary>
         private static SQLiteConnectionStringBuilder _SQLiteString = (new SQLiteConnectionStringBuilder());
         /// <summary>
-        /// # Metodo Configure Default SQLite ConnectionString
+        /// #H Metodo Configure Default SQLite ConnectionString
         /// </summary>
         private static void _ConfigureDefaultSQLiteString()
         {
@@ -42,7 +42,7 @@ namespace HOYLER.Data.SQLite
             _SQLiteString.Flags = (SQLiteConnectionFlags.LogAll);
         }
         /// <summary>
-        /// #Metodo Retona String Completa para SQLite
+        /// #H Metodo Retona String Completa para SQLite
         /// </summary>
         /// <param name="myDataSource">Patch Database</param>
         /// <param name="myHexPassword">Hex Password</param>

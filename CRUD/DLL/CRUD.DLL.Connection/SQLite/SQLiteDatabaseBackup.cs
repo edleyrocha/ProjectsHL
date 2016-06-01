@@ -17,96 +17,83 @@ using System;
 namespace HOYLER.Data.SQLite
 {
     /// <summary>
-    /// # Classe SQLiteDatabaseBackup
+    /// #H Classe H_SQLiteDatabaseBackup
     /// </summary>
     public class SQLiteDatabaseBackup
     {
         /// <summary>
-        /// # Metodo Contrutor da Classe SQLiteDatabaseBackup()
+        /// #H Metodo Contrutor da Classe H_SQLiteDatabaseBackup()
         /// </summary>
         public SQLiteDatabaseBackup()
         {
         }
-        public void BackupDatabaseDumpDB()
-        {
-        }
         /// <summary>
-        /// # Metodo para BackupDB via Copy
+        /// #H Metodo para BackupDB via Copy
         /// </summary>
         /// <param name="myDataSource"> Patch Source</param>
         /// <param name="myMoveBD">Move or NOT Move</param>
         /// <returns>Retorna string </returns>
         public static string BackupDatabaseCopyDB(String myDataSource, Boolean myMoveBD)
         {
-            ///String Retorno Padrao
+            //String Retorno Padrao
             var myReturn = (String.Empty);
-
-            ///Criar Pasta Default para Backup
-            var backupFolderDefault = (System.IO.Path.GetDirectoryName(myDataSource));
-            backupFolderDefault = (System.IO.Path.Combine((backupFolderDefault), (@"BackupDB\")));
-
-            // Check se Diretorio Existe
-            if (!System.IO.Directory.Exists(backupFolderDefault))
-            {
-                try
-                {
-                    // Criar Diretorio
-                    System.IO.Directory.CreateDirectory(backupFolderDefault);
-
-                    // Check se Diretorio Existe
-                    if (!System.IO.Directory.Exists(backupFolderDefault))
-                    {
-                        //Gerando Erro pois diretorio nao foi criado
-                        throw new System.ArgumentException("Erro ao Criar Pasta BackupDB (Gerado por IF)", "Metodo BackupDatabaseCopyDB()");
-                    }
-                }
-                catch (Exception myEx)
-                {
-                    // Retornar Erro
-                    myReturn = String.Format(("Erro ao Criar Pasta BackupDB:\n{0}\n{1}"), (backupFolderDefault), (myEx.ToString()));
-                    return myReturn;
-                }
-            }
-
-            ///Veriaveis para Backup
-            var fileName = System.IO.Path.GetFileName(myDataSource);
-            var patchDiretory = System.IO.Path.GetDirectoryName(myDataSource);
-            var dt = (DateTime.Now);
-
             try
             {
-                ///Verifica Move ou Copia Arquivo atual
+                // Check File (myDataSource) EXIST
+                if (!System.IO.File.Exists(myDataSource))
+                {
+                    /// Check File (myDataSource) NOT EXIST - ERRO
+                    throw new System.ArgumentException("Erro File Source Nao Existe (00001)", "Metodo BackupDatabaseCopyDB()");
+                }
+
+                //SET Pasta Default para BackupDB
+                var BackupDB_Folder = (System.IO.Path.GetDirectoryName(myDataSource));
+                BackupDB_Folder = (System.IO.Path.Combine((BackupDB_Folder), (@"BackupDB\")));
+
+                // Criar Diretorio
+                System.IO.Directory.CreateDirectory(BackupDB_Folder);
+
+                // Check Directory (\BackupDB) EXIST
+                if (!System.IO.Directory.Exists(BackupDB_Folder))
+                {
+                    // Check Directory (\BackupDB) NOT EXIST - ERRO
+                    throw new System.ArgumentException("Erro ao Criar pasta BackupDB (00002)", "Metodo BackupDatabaseCopyDB()");
+                }
+
+                //Veriaveis para Backup
+                var fileName = (System.IO.Path.GetFileName(myDataSource));
+                var patchDiretory = (System.IO.Path.GetDirectoryName(myDataSource));
+                var dateNow = (DateTime.Now);
+
+                //Set Format for File
+                var DestfileName = (String.Format(("{0}{1}{2}{3}"), (BackupDB_Folder), ("Backup_"), (dateNow.ToString("DATE_dd_MM_yyyy_T_HH_mm_ss_fff_")), (fileName)));
+
+                //Verifica Move(true) 
+                //Verifica Copia(false)
                 switch (myMoveBD)
                 {
-                    case (true):
+                    case (true)://Move
                         {
-                            if (System.IO.File.Exists(myDataSource))
-                            {
-                                var DestfileName = (String.Format(("{0}{1}{2}{3}"), (backupFolderDefault), ("Backup_"), (dt.ToString("DATE_dd_MM_yyyy_T_HH_mm_ss_fff_")), (fileName)));
-                                System.IO.File.Move((myDataSource), (DestfileName));
-                                myReturn = (String.Format(("{0}"), ("OK")));
-                            }
-                            else
-                            {
-                                throw new System.ArgumentException("Erro Arquivo nao Existe", "Metodo BackupDatabaseCopyDB()");
-                            }
+                            // Move File 
+                            System.IO.File.Move((myDataSource), (DestfileName));
+                            break;
+                        }
+                    case (false): //Copy
+                        {
+                            // Copy File 
+                            System.IO.File.Copy((myDataSource), (DestfileName));
+                            break;
+                        }
+                }
 
-                            break;
-                        }
-                    case (false):
-                        {
-                            if (System.IO.File.Exists(myDataSource))
-                            {
-                                var DestfileName = (String.Format(("{0}{1}{2}{3}"), (backupFolderDefault), ("Backup_"), (dt.ToString("DATE_dd_MM_yyyy_T_HH_mm_ss_fff_")), (fileName)));
-                                System.IO.File.Copy((myDataSource), (DestfileName));
-                                myReturn = (String.Format(("{0}"), ("OK")));
-                            }
-                            else
-                            {
-                                throw new System.ArgumentException("Erro Arquivo nao Existe", "Metodo BackupDatabaseCopyDB()");
-                            }
-                            break;
-                        }
+                // Check if File Exist
+                if (!System.IO.File.Exists(DestfileName))
+                {
+                    throw new System.ArgumentException("Erro BACKUP nao Encontrado (00003)", "Metodo BackupDatabaseCopyDB()");
+                }
+                else if (System.IO.File.Exists(DestfileName))
+                {
+                    myReturn = (String.Format(("{0}"), ("OK")));
                 }
             }
             catch (Exception myEx)

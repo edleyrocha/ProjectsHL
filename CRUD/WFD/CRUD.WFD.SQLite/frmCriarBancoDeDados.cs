@@ -72,13 +72,13 @@ namespace CRUD.WFD.SQLite
             if (backupIndex == 0)
             {
                 var patchBackup = textBox_CaminhoBackup.Text;
-                var msgResult = HOYLER.Data.SQLite.SQLiteDatabaseBackup.BackupDatabaseCopyDB(patchBackup, true);
+                var msgResult = HOYLER.Data.SQLite.H_SQLiteDatabaseBackup.BackupDatabaseCopyDB(patchBackup, true);
                 MessageBox.Show(msgResult);
             }
             else if (backupIndex == 1)
             {
                 var patchBackup = textBox_CaminhoBackup.Text;
-                var msgResult = HOYLER.Data.SQLite.SQLiteDatabaseBackup.BackupDatabaseCopyDB(patchBackup, false);
+                var msgResult = HOYLER.Data.SQLite.H_SQLiteDatabaseBackup.BackupDatabaseCopyDB(patchBackup, false);
                 MessageBox.Show(msgResult);
             }
             else
@@ -108,9 +108,9 @@ namespace CRUD.WFD.SQLite
         {
             var PatchA = (textBox_CaminhoCriar.Text);
             var passwdA = (textBox_Senha.Text);
-            var passwdAHex = (HOYLER.Data.SQLite.SQLiteConversor.H_GetBytes(passwdA));
+            var passwdAHex = (HOYLER.Data.SQLite.H_SQLiteDatabaseHexPassword.H_GetBytes(passwdA));
             var StringConn = (HOYLER.Data.SQLite.H_SQLiteDatabaseConnectionString.GetConnectionString(PatchA, passwdAHex));
-            var createFileA = (HOYLER.Data.SQLite.SQLiteDatabaseCreate.H_DatabaseCreateFile(StringConn));
+            var createFileA = (HOYLER.Data.SQLite.H_SQLiteDatabaseCreateDB.H_DatabaseCreateFile(StringConn));
             var msgTitle = ("Banco de Dados");
             var msgText = ("Criado com Sucesso");
             if (createFileA == "OK")
@@ -127,8 +127,8 @@ namespace CRUD.WFD.SQLite
         {
             var PatchB = (textBox_CaminhoCriar.Text);
             var passwdB = (textBox_Senha.Text);
-            var passwdBHex = (HOYLER.Data.SQLite.SQLiteConversor.H_GetBytes(passwdB));
-            var createFileB = (HOYLER.Data.SQLite.SQLiteDatabaseCreate.H_DatabaseCreateFile(PatchB, passwdBHex));
+            var passwdBHex = (HOYLER.Data.SQLite.H_SQLiteDatabaseHexPassword.H_GetBytes(passwdB));
+            var createFileB = (HOYLER.Data.SQLite.H_SQLiteDatabaseCreateDB.H_DatabaseCreateFile(PatchB, passwdBHex));
             var msgTitle = ("Banco de Dados");
             var msgText = ("Criado com Sucesso");
             if (createFileB == "OK")

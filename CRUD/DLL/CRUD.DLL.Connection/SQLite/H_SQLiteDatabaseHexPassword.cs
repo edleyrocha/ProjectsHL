@@ -19,12 +19,12 @@ namespace HOYLER.Data.SQLite
     /// <summary>
     /// #H Class Convert (String to byte[]) and (mybyts[] to String)
     /// </summary>
-    public class SQLiteConversor
+    public class H_SQLiteDatabaseHexPassword
     {
         /// <summary>
         /// #H Metodo Construtor da Classe H_SQLiteDatabaseHexPassword()
         /// </summary>
-        public SQLiteConversor()
+        public H_SQLiteDatabaseHexPassword()
         {
         }
         /// <summary>

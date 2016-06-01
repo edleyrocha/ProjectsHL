@@ -19,12 +19,12 @@ namespace HOYLER.Data.SQLite
     /// <summary>
     /// #H Classe H_SQLiteDatabaseBackup
     /// </summary>
-    public class SQLiteDatabaseBackup
+    public class H_SQLiteDatabaseBackup
     {
         /// <summary>
         /// #H Metodo Contrutor da Classe H_SQLiteDatabaseBackup()
         /// </summary>
-        public SQLiteDatabaseBackup()
+        public H_SQLiteDatabaseBackup()
         {
         }
         /// <summary>

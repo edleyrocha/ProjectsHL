@@ -20,12 +20,12 @@ namespace HOYLER.Data.SQLite
     /// <summary>
     /// #H Classe H_SQLiteDatabaseCreateDB
     /// </summary>
-    public class SQLiteDatabaseCreate
+    public class H_SQLiteDatabaseCreateDB
     {
         /// <summary>
         /// #H Metodo Contrutor da Classe H_SQLiteDatabaseCreateDB()
         /// </summary>
-        public SQLiteDatabaseCreate()
+        public H_SQLiteDatabaseCreateDB()
         {
         }
         /// <summary>

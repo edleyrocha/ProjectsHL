@@ -41,6 +41,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btn_ir_Backup = new System.Windows.Forms.Button();
             this.textBox_CaminhoBackup = new System.Windows.Forms.TextBox();
+            this.btn_CriarDefaultDB = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -182,11 +183,22 @@
             this.textBox_CaminhoBackup.Size = new System.Drawing.Size(207, 20);
             this.textBox_CaminhoBackup.TabIndex = 0;
             // 
+            // btn_CriarDefaultDB
+            // 
+            this.btn_CriarDefaultDB.Location = new System.Drawing.Point(271, 25);
+            this.btn_CriarDefaultDB.Name = "btn_CriarDefaultDB";
+            this.btn_CriarDefaultDB.Size = new System.Drawing.Size(102, 23);
+            this.btn_CriarDefaultDB.TabIndex = 5;
+            this.btn_CriarDefaultDB.Text = "Criar Default DB";
+            this.btn_CriarDefaultDB.UseVisualStyleBackColor = true;
+            this.btn_CriarDefaultDB.Click += new System.EventHandler(this.btn_CriarDefaultDB_Click);
+            // 
             // frmCriarBancoDeDados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(283, 389);
+            this.ClientSize = new System.Drawing.Size(680, 389);
+            this.Controls.Add(this.btn_CriarDefaultDB);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.MaximizeBox = false;
@@ -217,5 +229,6 @@
         private System.Windows.Forms.Button btn_ir_Backup;
         private System.Windows.Forms.TextBox textBox_CaminhoBackup;
         private System.Windows.Forms.ComboBox comboBox_Tipo_Backup;
+        private System.Windows.Forms.Button btn_CriarDefaultDB;
     }
 }

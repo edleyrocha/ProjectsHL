@@ -27,7 +27,6 @@ namespace HOYLER.Data.SQLite
         public H_SQLiteDatabase()
         {
         }
-
         /// <summary>
         /// #H Metodo para BackupDB via Copy
         /// </summary>
@@ -54,10 +53,10 @@ namespace HOYLER.Data.SQLite
                 // Criar Diretorio
                 System.IO.Directory.CreateDirectory(BackupDB_Folder);
 
-                // Check Directory (\BackupDB) EXIST
+                // Check DirectoryName (\BackupDB) EXIST
                 if (!System.IO.Directory.Exists(BackupDB_Folder))
                 {
-                    // Check Directory (\BackupDB) NOT EXIST - ERRO
+                    // Check DirectoryName (\BackupDB) NOT EXIST - ERRO
                     throw new System.ArgumentException("Erro ao Criar pasta BackupDB (00002)", "Metodo BackupCopyDB()");
                 }
 
@@ -117,12 +116,12 @@ namespace HOYLER.Data.SQLite
             {
                 // File Patch via Parametros
                 var FilePatch = (Parametros.GetStringBuilder.DataSource);
-                // Check Directory Exists
+                // Check DirectoryName Exists
                 var DirectoryName = (System.IO.Path.GetDirectoryName(FilePatch));
                 if (!System.IO.Directory.Exists(DirectoryName))
                 {
-                    // Check Directory Exists - ERRO
-                    throw new System.ArgumentException("Erro Directory Name (00001) NOT Exists", "Metodo CreateFileDB()");
+                    // Check DirectoryName Exists - ERRO
+                    throw new System.ArgumentException("Erro DirectoryName Name (00001) NOT Exists", "Metodo CreateFileDB()");
                 };
                 // Check File Exists 
                 if (System.IO.File.Exists(FilePatch))
@@ -154,6 +153,25 @@ namespace HOYLER.Data.SQLite
             }
             //Retorno do metodo
             return (myReturn);
+        }
+        /// <summary>
+        /// #H Metodo para Criar Default Banco de Dados e Armazenar as Configuraçoes
+        /// </summary>
+        public static void CreateFileDefault()
+        {
+            var DirectoryName = (System.IO.Directory.GetCurrentDirectory());
+            var DirectoryName_FileName = (System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+            var FileNameSemExtencao = (System.IO.Path.GetFileNameWithoutExtension(DirectoryName_FileName));
+            var Extencao = (".db3");
+            var FileNameComExtencao = (System.IO.Path.Combine((DirectoryName), ((FileNameSemExtencao) + (Extencao))));
+            var PasswdHex = (HOYLER.Data.SQLite.H_SQLiteDatabaseHexPassword.H_GetBytes("balada"));
+            H_SQLiteConnectionStringBuilder Parametros = new H_SQLiteConnectionStringBuilder()
+            {
+                @StringBuilder_1_SetDataSource = (FileNameComExtencao),
+                @StringBuilder_2_SetHexPassword = (PasswdHex),
+                @StringBuilder_3_SetFailIfMissing = (false)
+            };
+            HOYLER.Data.SQLite.H_SQLiteDatabase.CreateFileDB(Parametros: Parametros);
         }
     }
 }

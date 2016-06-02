@@ -142,5 +142,10 @@ namespace CRUD.WFD.SQLite
             saveFileDialog.ShowDialog();
             textBox_CaminhoCriar.Text = saveFileDialog.FileName;
         }
+
+        private void btn_CriarDefaultDB_Click(object sender, EventArgs e)
+        {
+            HOYLER.Data.SQLite.H_SQLiteDatabase.CreateFileDefault();
+        }
     }
 }

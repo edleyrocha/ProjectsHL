@@ -48,9 +48,6 @@
     <Compile Include="SQLite\H_SQLiteDatabase.cs" />
     <Compile Include="SQLite\H_SQLiteDatabaseHexPassword.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SQLite\H_SQLiteDatabaseBackup.cs" />
-    <Compile Include="SQLite\H_SQLiteDatabaseConnectionString.cs" />
-    <Compile Include="SQLite\H_SQLiteDatabaseCreateDB.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="SQLite.Interop.dll">

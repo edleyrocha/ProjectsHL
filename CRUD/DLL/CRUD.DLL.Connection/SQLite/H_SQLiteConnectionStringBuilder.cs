@@ -20,7 +20,7 @@ namespace HOYLER.Data.SQLite
     /// <summary>
     /// #H Classe H_SQLiteConnectionStringBuilder
     /// </summary>
-    class H_SQLiteConnectionStringBuilder
+    public class H_SQLiteConnectionStringBuilder
     {
         /// <summary>
         /// #H Metodo Construtor H_SQLiteConnectionStringBuilder

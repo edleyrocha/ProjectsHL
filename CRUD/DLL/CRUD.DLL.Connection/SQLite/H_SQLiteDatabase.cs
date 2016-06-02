@@ -19,7 +19,7 @@ namespace HOYLER.Data.SQLite
     /// <summary>
     /// #H Classe H_SQLiteDatabase
     /// </summary>
-    class H_SQLiteDatabase
+    public class H_SQLiteDatabase
     {
         /// <summary>
         /// #H Metodo Construtor H_SQLiteDatabase()
@@ -44,7 +44,7 @@ namespace HOYLER.Data.SQLite
                 if (!System.IO.File.Exists(myDataSource))
                 {
                     /// Check File (myDataSource) NOT EXIST - ERRO
-                    throw new System.ArgumentException("Erro File Source Nao Existe (00001)", "Metodo BackupDatabaseCopyDB()");
+                    throw new System.ArgumentException("Erro File Source Nao Existe (00001)", "Metodo BackupCopyDB()");
                 }
 
                 //SET Pasta Default para BackupDB
@@ -58,7 +58,7 @@ namespace HOYLER.Data.SQLite
                 if (!System.IO.Directory.Exists(BackupDB_Folder))
                 {
                     // Check Directory (\BackupDB) NOT EXIST - ERRO
-                    throw new System.ArgumentException("Erro ao Criar pasta BackupDB (00002)", "Metodo BackupDatabaseCopyDB()");
+                    throw new System.ArgumentException("Erro ao Criar pasta BackupDB (00002)", "Metodo BackupCopyDB()");
                 }
 
                 //Veriaveis para Backup
@@ -90,7 +90,7 @@ namespace HOYLER.Data.SQLite
                 // Check if File Exist
                 if (!System.IO.File.Exists(DestfileName))
                 {
-                    throw new System.ArgumentException("Erro BACKUP nao Encontrado (00003)", "Metodo BackupDatabaseCopyDB()");
+                    throw new System.ArgumentException("Erro BACKUP nao Encontrado (00003)", "Metodo BackupCopyDB()");
                 }
                 else if (System.IO.File.Exists(DestfileName))
                 {
@@ -109,7 +109,7 @@ namespace HOYLER.Data.SQLite
         /// </summary>
         /// <param name="Parametros"> SQLiteConnectionStringBuilder como Parametro</param>
         /// <returns>Retorna string</returns>
-        public static string CreateFile(H_SQLiteConnectionStringBuilder Parametros)
+        public static string CreateFileDB(H_SQLiteConnectionStringBuilder Parametros)
         {
             //Default Return
             var myReturn = (String.Empty);
@@ -122,13 +122,13 @@ namespace HOYLER.Data.SQLite
                 if (!System.IO.Directory.Exists(DirectoryName))
                 {
                     // Check Directory Exists - ERRO
-                    throw new System.ArgumentException("Erro Directory Name (00001) NOT Exists", "Metodo CreateFile()");
+                    throw new System.ArgumentException("Erro Directory Name (00001) NOT Exists", "Metodo CreateFileDB()");
                 };
                 // Check File Exists 
                 if (System.IO.File.Exists(FilePatch))
                 {
                     // Check File Exists - ERRO
-                    throw new System.ArgumentException("Erro File Name (00002) Exists", "Metodo CreateFile()");
+                    throw new System.ArgumentException("Erro File Name (00002) Exists", "Metodo CreateFileDB()");
                 };
                 // Cria Banco de Dados
                 using (var SQLiteConn = (new System.Data.SQLite.SQLiteConnection(Parametros.GetStringBuilder.ConnectionString)))
@@ -142,7 +142,7 @@ namespace HOYLER.Data.SQLite
                 if (!System.IO.File.Exists(FilePatch))
                 {
                     // Check File NOT Exists - ERRO
-                    throw new System.ArgumentException("Erro File Name (00003) NOT Exists", "Metodo CreateFile()");
+                    throw new System.ArgumentException("Erro File Name (00003) NOT Exists", "Metodo CreateFileDB()");
                 };
                 // Returno de Sucesso
                 myReturn = (String.Format(("{0}"), ("OK")));

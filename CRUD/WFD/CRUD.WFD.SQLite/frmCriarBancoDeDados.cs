@@ -22,8 +22,7 @@ namespace CRUD.WFD.SQLite
             textBox_Senha.Enabled = !textBox_Senha.Enabled;
             checkBox_Senha.Enabled = !checkBox_Senha.Enabled;
             btn_BuscarBanco.Enabled = !btn_BuscarBanco.Enabled;
-            btn_CriarBancoA.Enabled = !btn_CriarBancoA.Enabled;
-            btn_CriarBancoB.Enabled = !btn_CriarBancoB.Enabled;
+            btn_CriarBanco.Enabled = !btn_CriarBanco.Enabled;
         }
 
         private void checkBox_Caminho_CheckStateChanged(object sender, EventArgs e)
@@ -34,8 +33,7 @@ namespace CRUD.WFD.SQLite
             if (checkBox_Caminho.Checked)
             {
                 checkBox_Senha.Enabled = true;
-                btn_CriarBancoA.Enabled = true;
-                btn_CriarBancoB.Enabled = true;
+                btn_CriarBanco.Enabled = true;
                 btn_BuscarBanco.Enabled = true;
 
             }
@@ -43,8 +41,7 @@ namespace CRUD.WFD.SQLite
             {
                 checkBox_Senha.Checked = false;
                 checkBox_Senha.Enabled = false;
-                btn_CriarBancoA.Enabled = false;
-                btn_CriarBancoB.Enabled = false;
+                btn_CriarBanco.Enabled = false;
                 btn_BuscarBanco.Enabled = false;
             }
         }
@@ -72,18 +69,18 @@ namespace CRUD.WFD.SQLite
             if (backupIndex == 0)
             {
                 var patchBackup = textBox_CaminhoBackup.Text;
-                var msgResult = HOYLER.Data.SQLite.H_SQLiteDatabaseBackup.BackupDatabaseCopyDB(patchBackup, true);
+                var msgResult = HOYLER.Data.SQLite.H_SQLiteDatabase.BackupCopyDB(patchBackup, true);
                 MessageBox.Show(msgResult);
             }
             else if (backupIndex == 1)
             {
                 var patchBackup = textBox_CaminhoBackup.Text;
-                var msgResult = HOYLER.Data.SQLite.H_SQLiteDatabaseBackup.BackupDatabaseCopyDB(patchBackup, false);
+                var msgResult = HOYLER.Data.SQLite.H_SQLiteDatabase.BackupCopyDB(patchBackup, false);
                 MessageBox.Show(msgResult);
             }
             else
             {
-                MessageBox.Show("xxxx");
+                MessageBox.Show("Outros");
             }
         }
 
@@ -106,41 +103,31 @@ namespace CRUD.WFD.SQLite
 
         private void btn_CriarBancoA_Click(object sender, EventArgs e)
         {
-            var PatchA = (textBox_CaminhoCriar.Text);
-            var passwdA = (textBox_Senha.Text);
-            var passwdAHex = (HOYLER.Data.SQLite.H_SQLiteDatabaseHexPassword.H_GetBytes(passwdA));
-            var StringConn = (HOYLER.Data.SQLite.H_SQLiteDatabaseConnectionString.GetConnectionString(PatchA, passwdAHex));
-            var createFileA = (HOYLER.Data.SQLite.H_SQLiteDatabaseCreateDB.H_DatabaseCreateFile(StringConn));
+            var Patch = (textBox_CaminhoCriar.Text);
+            var Passwd = (textBox_Senha.Text);
+            var PasswdHex = (HOYLER.Data.SQLite.H_SQLiteDatabaseHexPassword.H_GetBytes(Passwd));
+
+            H_SQLiteConnectionStringBuilder Parametros = new H_SQLiteConnectionStringBuilder()
+            {
+                @StringBuilder_1_SetDataSource = (Patch),
+                @StringBuilder_2_SetHexPassword = (PasswdHex),
+                @StringBuilder_3_SetFailIfMissing = (false)
+            };
+
+            var resultCreate = (HOYLER.Data.SQLite.H_SQLiteDatabase.CreateFileDB(Parametros: Parametros));
             var msgTitle = ("Banco de Dados");
             var msgText = ("Criado com Sucesso");
-            if (createFileA == "OK")
+
+
+            if (resultCreate == "OK")
             {
                 MessageBox.Show(msgText, msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show(createFileA, msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(resultCreate, msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private void btn_CriarBancoB_Click(object sender, EventArgs e)
-        {
-            var PatchB = (textBox_CaminhoCriar.Text);
-            var passwdB = (textBox_Senha.Text);
-            var passwdBHex = (HOYLER.Data.SQLite.H_SQLiteDatabaseHexPassword.H_GetBytes(passwdB));
-            var createFileB = (HOYLER.Data.SQLite.H_SQLiteDatabaseCreateDB.H_DatabaseCreateFile(PatchB, passwdBHex));
-            var msgTitle = ("Banco de Dados");
-            var msgText = ("Criado com Sucesso");
-            if (createFileB == "OK")
-            {
-                MessageBox.Show(msgText, msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                MessageBox.Show(createFileB, msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         private void btn_BuscarBanco_Click(object sender, EventArgs e)
         {
             var saveFileDialog = new SaveFileDialog();

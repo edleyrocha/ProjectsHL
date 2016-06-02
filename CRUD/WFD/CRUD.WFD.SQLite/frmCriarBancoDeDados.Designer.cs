@@ -28,10 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btn_CriarBancoA = new System.Windows.Forms.Button();
+            this.btn_CriarBanco = new System.Windows.Forms.Button();
             this.textBox_CaminhoCriar = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btn_CriarBancoB = new System.Windows.Forms.Button();
             this.btn_BuscarBanco = new System.Windows.Forms.Button();
             this.checkBox_Caminho = new System.Windows.Forms.CheckBox();
             this.checkBox_Senha = new System.Windows.Forms.CheckBox();
@@ -46,15 +45,15 @@
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // btn_CriarBancoA
+            // btn_CriarBanco
             // 
-            this.btn_CriarBancoA.Location = new System.Drawing.Point(7, 117);
-            this.btn_CriarBancoA.Name = "btn_CriarBancoA";
-            this.btn_CriarBancoA.Size = new System.Drawing.Size(96, 23);
-            this.btn_CriarBancoA.TabIndex = 0;
-            this.btn_CriarBancoA.Text = "Criar DB Modo A";
-            this.btn_CriarBancoA.UseVisualStyleBackColor = true;
-            this.btn_CriarBancoA.Click += new System.EventHandler(this.btn_CriarBancoA_Click);
+            this.btn_CriarBanco.Location = new System.Drawing.Point(118, 117);
+            this.btn_CriarBanco.Name = "btn_CriarBanco";
+            this.btn_CriarBanco.Size = new System.Drawing.Size(96, 23);
+            this.btn_CriarBanco.TabIndex = 0;
+            this.btn_CriarBanco.Text = "Criar DB";
+            this.btn_CriarBanco.UseVisualStyleBackColor = true;
+            this.btn_CriarBanco.Click += new System.EventHandler(this.btn_CriarBancoA_Click);
             // 
             // textBox_CaminhoCriar
             // 
@@ -67,29 +66,18 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btn_CriarBancoB);
             this.groupBox1.Controls.Add(this.btn_BuscarBanco);
             this.groupBox1.Controls.Add(this.checkBox_Caminho);
             this.groupBox1.Controls.Add(this.checkBox_Senha);
             this.groupBox1.Controls.Add(this.textBox_Senha);
             this.groupBox1.Controls.Add(this.textBox_CaminhoCriar);
-            this.groupBox1.Controls.Add(this.btn_CriarBancoA);
+            this.groupBox1.Controls.Add(this.btn_CriarBanco);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(253, 173);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criar DB";
-            // 
-            // btn_CriarBancoB
-            // 
-            this.btn_CriarBancoB.Location = new System.Drawing.Point(118, 117);
-            this.btn_CriarBancoB.Name = "btn_CriarBancoB";
-            this.btn_CriarBancoB.Size = new System.Drawing.Size(96, 23);
-            this.btn_CriarBancoB.TabIndex = 11;
-            this.btn_CriarBancoB.Text = "Criar DB Modo B";
-            this.btn_CriarBancoB.UseVisualStyleBackColor = true;
-            this.btn_CriarBancoB.Click += new System.EventHandler(this.btn_CriarBancoB_Click);
             // 
             // btn_BuscarBanco
             // 
@@ -216,7 +204,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btn_CriarBancoA;
+        private System.Windows.Forms.Button btn_CriarBanco;
         private System.Windows.Forms.TextBox textBox_CaminhoCriar;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox checkBox_Senha;
@@ -229,6 +217,5 @@
         private System.Windows.Forms.Button btn_ir_Backup;
         private System.Windows.Forms.TextBox textBox_CaminhoBackup;
         private System.Windows.Forms.ComboBox comboBox_Tipo_Backup;
-        private System.Windows.Forms.Button btn_CriarBancoB;
     }
 }

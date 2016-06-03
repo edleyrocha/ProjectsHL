@@ -145,7 +145,7 @@ namespace CRUD.WFD.SQLite
 
         private void btn_CriarDefaultDB_Click(object sender, EventArgs e)
         {
-            HOYLER.Data.SQLite.H_SQLiteDatabase.CreateFileDB_Default();
+            HOYLER.Data.SQLite.H_SQLiteDatabase.CreateFileDBDefault();
         }
 
         private void btn_ExecuteDefaultComman_Click(object sender, EventArgs e)
@@ -154,16 +154,14 @@ namespace CRUD.WFD.SQLite
             String str = rtb_CommandSQL.Text;
             str = str.Replace("\n", "");
             ParametroSQL.Append(str.Trim());
-            HOYLER.Data.SQLite.H_SQLiteDatabase.SQLExecuteNonQuery_Default(ParametroSQL: ParametroSQL);
+            HOYLER.Data.SQLite.H_SQLiteDatabase.SQLExecuteNonQueryDefault(ParametroSQL: ParametroSQL);
 
         }
 
         private void btn_ExecComGrid_Click(object sender, EventArgs e)
         {
-            var ParametroSQL = new System.Text.StringBuilder();
-            ParametroSQL.Append(rtb_CommandSQL.Text);
-
-            //HOYLER.Data.SQLite.H_SQLiteDatabase.ExecuteSQL_ReturnDataset_Default(ParametroSQL: ParametroSQL);
+            var ParametroSQL = (String.Empty);
+            ParametroSQL = (rtb_CommandSQL.Text);
 
             var DirectoryName = (System.IO.Directory.GetCurrentDirectory());
             var DirectoryName_FileName = (System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
@@ -177,7 +175,7 @@ namespace CRUD.WFD.SQLite
                 @StringBuilder_3_SetPassword = ("balada")
             };
             var ParametroSaida = (String.Empty);
-            var ds = HOYLER.Data.SQLite.H_SQLiteDatabase.ExecuteSQL_ReturnDataset
+            var ds = HOYLER.Data.SQLite.H_SQLiteDatabase.ExecuteSQLReturnDataset
             (
             @Parametros: Parametros,
             @ParametroSQL: ParametroSQL,
@@ -188,9 +186,6 @@ namespace CRUD.WFD.SQLite
             {
                 grv_Principal.DataSource = ds.Tables[0];
             }
-
-  
-            
         }
     }
 }

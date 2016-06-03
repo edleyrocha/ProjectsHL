@@ -70,7 +70,7 @@ namespace CRUD.WFD.SQLite
             {
                 var patchBackup = textBox_CaminhoBackup.Text;
                 var msgResult = HOYLER.Data.SQLite.H_SQLiteDatabase.BackupCopyDB(patchBackup, true);
-                MessageBox.Show(msgResult);
+                System.Windows.Forms.MessageBox.Show(msgResult);
             }
             else if (backupIndex == 1)
             {
@@ -105,13 +105,13 @@ namespace CRUD.WFD.SQLite
         {
             var Patch = (textBox_CaminhoCriar.Text);
             var Passwd = (textBox_Senha.Text);
-            var PasswdHex = (HOYLER.Data.SQLite.H_SQLiteDatabaseHexPassword.H_GetBytes(Passwd));
+            var PasswdHex = (HOYLER.Data.SQLite.H_SQLiteDatabaseHexPassword.GetBytes(Passwd));
 
             H_SQLiteConnectionStringBuilder Parametros = new H_SQLiteConnectionStringBuilder()
             {
                 @StringBuilder_1_SetDataSource = (Patch),
                 @StringBuilder_2_SetHexPassword = (PasswdHex),
-                @StringBuilder_3_SetFailIfMissing = (false)
+                StringBuilder_4_SetFailIfMissing = (false)
             };
 
             var resultCreate = (HOYLER.Data.SQLite.H_SQLiteDatabase.CreateFileDB(Parametros: Parametros));
@@ -145,7 +145,52 @@ namespace CRUD.WFD.SQLite
 
         private void btn_CriarDefaultDB_Click(object sender, EventArgs e)
         {
-            HOYLER.Data.SQLite.H_SQLiteDatabase.CreateFileDefault();
+            HOYLER.Data.SQLite.H_SQLiteDatabase.CreateFileDB_Default();
+        }
+
+        private void btn_ExecuteDefaultComman_Click(object sender, EventArgs e)
+        {
+            var ParametroSQL = new System.Text.StringBuilder();
+            String str = rtb_CommandSQL.Text;
+            str = str.Replace("\n", "");
+            ParametroSQL.Append(str.Trim());
+            HOYLER.Data.SQLite.H_SQLiteDatabase.SQLExecuteNonQuery_Default(ParametroSQL: ParametroSQL);
+
+        }
+
+        private void btn_ExecComGrid_Click(object sender, EventArgs e)
+        {
+            var ParametroSQL = new System.Text.StringBuilder();
+            ParametroSQL.Append(rtb_CommandSQL.Text);
+
+            //HOYLER.Data.SQLite.H_SQLiteDatabase.ExecuteSQL_ReturnDataset_Default(ParametroSQL: ParametroSQL);
+
+            var DirectoryName = (System.IO.Directory.GetCurrentDirectory());
+            var DirectoryName_FileName = (System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+            var FileNameSemExtencao = (System.IO.Path.GetFileNameWithoutExtension(DirectoryName_FileName));
+            var Extencao = (".db3");
+            var FileNameComExtencao = (System.IO.Path.Combine((DirectoryName), ((FileNameSemExtencao) + (Extencao))));
+            var PasswdHex = (HOYLER.Data.SQLite.H_SQLiteDatabaseHexPassword.GetBytes("balada"));
+            H_SQLiteConnectionStringBuilder Parametros = new H_SQLiteConnectionStringBuilder()
+            {
+                @StringBuilder_1_SetDataSource = (FileNameComExtencao),
+                @StringBuilder_3_SetPassword = ("balada")
+            };
+            var ParametroSaida = (String.Empty);
+            var ds = HOYLER.Data.SQLite.H_SQLiteDatabase.ExecuteSQL_ReturnDataset
+            (
+            @Parametros: Parametros,
+            @ParametroSQL: ParametroSQL,
+            ParametroSaida: ref ParametroSaida
+            );
+            int numero = ds.Tables.Count;
+            if (numero >=1)
+            {
+                grv_Principal.DataSource = ds.Tables[0];
+            }
+
+  
+            
         }
     }
 }

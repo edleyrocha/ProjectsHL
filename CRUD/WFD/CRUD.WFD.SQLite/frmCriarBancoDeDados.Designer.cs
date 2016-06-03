@@ -42,8 +42,13 @@
             this.btn_ir_Backup = new System.Windows.Forms.Button();
             this.textBox_CaminhoBackup = new System.Windows.Forms.TextBox();
             this.btn_CriarDefaultDB = new System.Windows.Forms.Button();
+            this.btn_ExecuteDefaultComman = new System.Windows.Forms.Button();
+            this.grv_Principal = new System.Windows.Forms.DataGridView();
+            this.btn_ExecComGrid = new System.Windows.Forms.Button();
+            this.rtb_CommandSQL = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grv_Principal)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_CriarBanco
@@ -193,11 +198,55 @@
             this.btn_CriarDefaultDB.UseVisualStyleBackColor = true;
             this.btn_CriarDefaultDB.Click += new System.EventHandler(this.btn_CriarDefaultDB_Click);
             // 
+            // btn_ExecuteDefaultComman
+            // 
+            this.btn_ExecuteDefaultComman.Location = new System.Drawing.Point(514, 288);
+            this.btn_ExecuteDefaultComman.Name = "btn_ExecuteDefaultComman";
+            this.btn_ExecuteDefaultComman.Size = new System.Drawing.Size(154, 23);
+            this.btn_ExecuteDefaultComman.TabIndex = 6;
+            this.btn_ExecuteDefaultComman.Text = "Execute Command";
+            this.btn_ExecuteDefaultComman.UseVisualStyleBackColor = true;
+            this.btn_ExecuteDefaultComman.Click += new System.EventHandler(this.btn_ExecuteDefaultComman_Click);
+            // 
+            // grv_Principal
+            // 
+            this.grv_Principal.AllowUserToAddRows = false;
+            this.grv_Principal.AllowUserToDeleteRows = false;
+            this.grv_Principal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grv_Principal.Location = new System.Drawing.Point(272, 156);
+            this.grv_Principal.Name = "grv_Principal";
+            this.grv_Principal.ReadOnly = true;
+            this.grv_Principal.Size = new System.Drawing.Size(396, 126);
+            this.grv_Principal.TabIndex = 7;
+            // 
+            // btn_ExecComGrid
+            // 
+            this.btn_ExecComGrid.Location = new System.Drawing.Point(514, 317);
+            this.btn_ExecComGrid.Name = "btn_ExecComGrid";
+            this.btn_ExecComGrid.Size = new System.Drawing.Size(154, 23);
+            this.btn_ExecComGrid.TabIndex = 8;
+            this.btn_ExecComGrid.Text = "Execute Command com Grid";
+            this.btn_ExecComGrid.UseVisualStyleBackColor = true;
+            this.btn_ExecComGrid.Click += new System.EventHandler(this.btn_ExecComGrid_Click);
+            // 
+            // rtb_CommandSQL
+            // 
+            this.rtb_CommandSQL.Location = new System.Drawing.Point(272, 54);
+            this.rtb_CommandSQL.Name = "rtb_CommandSQL";
+            this.rtb_CommandSQL.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
+            this.rtb_CommandSQL.Size = new System.Drawing.Size(396, 96);
+            this.rtb_CommandSQL.TabIndex = 9;
+            this.rtb_CommandSQL.Text = "";
+            // 
             // frmCriarBancoDeDados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(680, 389);
+            this.ClientSize = new System.Drawing.Size(678, 389);
+            this.Controls.Add(this.rtb_CommandSQL);
+            this.Controls.Add(this.btn_ExecComGrid);
+            this.Controls.Add(this.grv_Principal);
+            this.Controls.Add(this.btn_ExecuteDefaultComman);
             this.Controls.Add(this.btn_CriarDefaultDB);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -210,6 +259,7 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grv_Principal)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -230,5 +280,9 @@
         private System.Windows.Forms.TextBox textBox_CaminhoBackup;
         private System.Windows.Forms.ComboBox comboBox_Tipo_Backup;
         private System.Windows.Forms.Button btn_CriarDefaultDB;
+        private System.Windows.Forms.Button btn_ExecuteDefaultComman;
+        private System.Windows.Forms.DataGridView grv_Principal;
+        private System.Windows.Forms.Button btn_ExecComGrid;
+        private System.Windows.Forms.RichTextBox rtb_CommandSQL;
     }
 }

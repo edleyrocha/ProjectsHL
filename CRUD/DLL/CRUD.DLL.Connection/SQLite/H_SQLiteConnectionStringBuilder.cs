@@ -23,16 +23,19 @@ namespace HOYLER.Data.SQLite
     public class H_SQLiteConnectionStringBuilder
     {
         /// <summary>
-        /// #H Metodo Construtor H_SQLiteConnectionStringBuilder
+        /// #H Metodo Construtor H_SQLiteConnectionStringBuilder()
         /// </summary>
         public H_SQLiteConnectionStringBuilder()
         {
-            this.H_ConfigureDefault();
+            /// <summary>
+            /// #H Executa Metodo ConfigureDefault();
+            /// </summary>
+            this.ConfigureDefault();
         }
         /// <summary>
-        /// #H Metodo H_ConfigureDefault()
+        /// #H Metodo ConfigureDefault()
         /// </summary>
-        private void H_ConfigureDefault()
+        private void ConfigureDefault()
         {
             _stringBuilder.Clear();
             _stringBuilder.SetDefaults = (true);
@@ -46,27 +49,42 @@ namespace HOYLER.Data.SQLite
             _stringBuilder.Flags = (System.Data.SQLite.SQLiteConnectionFlags.LogAll);
         }
         /// <summary>
-        /// #H _stringBuilder SQLiteConnectionStringBuilder
+        /// #H Field _stringBuilder SQLiteConnectionStringBuilder
         /// </summary>
-        private SQLiteConnectionStringBuilder _stringBuilder = new SQLiteConnectionStringBuilder();
-        public SQLiteConnectionStringBuilder GetStringBuilder
+        private System.Data.SQLite.SQLiteConnectionStringBuilder _stringBuilder = new System.Data.SQLite.SQLiteConnectionStringBuilder();
+        /// <summary>
+        /// # Metodo Retorno _stringBuilder
+        /// </summary>
+        public System.Data.SQLite.SQLiteConnectionStringBuilder GetStringBuilder
         {
             get { return _stringBuilder; }
-            //set { _stringBuilder = value; }
         }
+        /// <summary>
+        /// # Metodo Set DataSource
+        /// </summary>
         public string StringBuilder_1_SetDataSource
         {
-            //get { return StringBuilder.DataSource; }
             set { _stringBuilder.DataSource = value; }
         }
+        /// <summary>
+        /// # Metodo Set HexPassword
+        /// </summary>
         public byte[] StringBuilder_2_SetHexPassword
         {
-            //get { return StringBuilder.HexPassword; }
             set { _stringBuilder.HexPassword = value; }
         }
-        public bool StringBuilder_3_SetFailIfMissing
+        /// <summary>
+        /// # Metodo Set Password
+        /// </summary>
+        public string StringBuilder_3_SetPassword
         {
-            //get { return StringBuilder.FailIfMissing; }
+            set { _stringBuilder.Password = value; }
+        }
+        /// <summary>
+        /// # Metodo Set FailIfMissing
+        /// </summary>
+        public bool StringBuilder_4_SetFailIfMissing
+        {
             set { _stringBuilder.FailIfMissing = value; }
         }
     }

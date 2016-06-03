@@ -14,6 +14,8 @@
 **/
 #endregion
 using System;
+using System.Data;
+using System.Data.SQLite;
 namespace HOYLER.Data.SQLite
 {
     /// <summary>
@@ -155,23 +157,202 @@ namespace HOYLER.Data.SQLite
             return (myReturn);
         }
         /// <summary>
+        /// #H Metodo SQLExecuteNonQuery()
+        /// </summary>
+        /// <param name="Parametros">Parametros H_SQLiteConnectionStringBuilder </param>
+        /// <param name="ParametroSQL">Parametros StringBuilder </param>
+        /// <returns></returns>
+        public static string SQLExecuteNonQuery(H_SQLiteConnectionStringBuilder Parametros, System.Text.StringBuilder ParametroSQL)
+        {
+            //Default Return
+            var myReturn = (String.Empty);
+            try
+            {
+                // File Patch via Parametros
+                var FilePatch = (Parametros.GetStringBuilder.DataSource);
+                // Check DirectoryName Exists
+                var DirectoryName = (System.IO.Path.GetDirectoryName(FilePatch));
+                if (!System.IO.Directory.Exists(DirectoryName))
+                {
+                    // Check DirectoryName Exists - ERRO
+                    throw new System.ArgumentException("Erro DirectoryName Name (00001) NOT Exists", "Metodo SQLExecuteNonQuery()");
+                };
+                // Check File NOT Exists 
+                if (!System.IO.File.Exists(FilePatch))
+                {
+                    // Check File Exists - ERRO
+                    throw new System.ArgumentException("Erro File Name (00002) NOT Exists", "Metodo SQLExecuteNonQuery()");
+                };
+                // Abrir Banco de Dados
+                using (var SQLiteConn = (new System.Data.SQLite.SQLiteConnection(Parametros.GetStringBuilder.ConnectionString)))
+                {
+                    using (var cmdSQL = new System.Data.SQLite.SQLiteCommand(SQLiteConn))
+                    {
+                        cmdSQL.CommandType = (System.Data.CommandType.Text);
+                        cmdSQL.CommandTimeout = (3);
+                        cmdSQL.CommandText = (ParametroSQL.ToString());
+                        var count_I = (0);
+                        SQLiteConn.Open();
+
+                        count_I = (cmdSQL.ExecuteNonQuery());
+
+                        if (count_I <= (-1))
+                        {
+                            // Check Exec SQL - ERRO
+                            throw new System.ArgumentException("Erro Exec SQL (00003) Erro", "Metodo SQLExecuteNonQuery()");
+                        }
+
+                        SQLiteConn.Close();
+                    }
+                };
+                // Returno de Sucesso
+                myReturn = (String.Format(("{0}"), ("OK")));
+            }
+            catch (Exception myEx)
+            {
+                //Retorno de Erro
+                myReturn = (String.Format(("Erro:\n{0}"), (myEx.ToString())));
+            }
+            //Retorno do metodo
+            return (myReturn);
+        }
+        /// <summary>
+        /// #H Metodo ExecuteSQL_ReturnDataset()
+        /// </summary>
+        /// <param name="Parametros">Parametros de Conexao</param>
+        /// <param name="ParametroSQL"> Parametros SQL</param>
+        /// <param name="ParametroSaida"> Parametro de Saida </param>
+        /// <returns></returns>
+        public static System.Data.DataSet ExecuteSQL_ReturnDataset(H_SQLiteConnectionStringBuilder Parametros, System.Text.StringBuilder ParametroSQL, ref string ParametroSaida)
+        {
+            //Default Return
+            var myReturn = (new System.Data.DataSet());
+            try
+            {
+                // File Patch via Parametros
+                var FilePatch = (Parametros.GetStringBuilder.DataSource);
+                // Check DirectoryName Exists
+                var DirectoryName = (System.IO.Path.GetDirectoryName(FilePatch));
+                if (!System.IO.Directory.Exists(DirectoryName))
+                {
+                    // Check DirectoryName Exists - ERRO
+                    throw new System.ArgumentException("Erro DirectoryName Name (00001) NOT Exists", "Metodo ExecuteSQL_ReturnDataset()");
+                };
+                // Check File NOT Exists 
+                if (!System.IO.File.Exists(FilePatch))
+                {
+                    // Check File Exists - ERRO
+                    throw new System.ArgumentException("Erro File Name (00002) NOT Exists", "Metodo ExecuteSQL_ReturnDataset()");
+                };
+                // Abrir Banco de Dados
+                using (var SQLiteConn = (new System.Data.SQLite.SQLiteConnection(Parametros.GetStringBuilder.ConnectionString)))
+                {
+                    using (var cmdSQL = new System.Data.SQLite.SQLiteCommand(SQLiteConn))
+                    {
+                        cmdSQL.CommandType = (System.Data.CommandType.Text);
+                        cmdSQL.CommandTimeout = (3);
+                        cmdSQL.CommandText = (ParametroSQL.ToString());
+                        using (var adapterSQL = new System.Data.SQLite.SQLiteDataAdapter(cmdSQL))
+                        {
+                            SQLiteConn.Open();
+                            var count_I = (0);
+                            count_I = adapterSQL.Fill(myReturn);
+                            if (count_I <= (-1))
+                            {
+                                // Check Exec SQL - ERRO
+                                throw new System.ArgumentException("Erro Exec SQL (00003) Erro", "Metodo ExecuteSQL_ReturnDataset()");
+                            };
+                            SQLiteConn.Close();
+                        };
+                    };
+                };
+                // Returno de Sucesso
+                // myReturn = (String.Format(("{0}"), ("OK")));
+            }
+            catch (Exception myEx)
+            {
+                //Retorno de Erro
+                ParametroSaida = (String.Format(("Erro:\n{0}"), (myEx.ToString())));
+            }
+            //Retorno do metodo
+            return (myReturn);
+        }
+        /// <summary>
         /// #H Metodo para Criar Default Banco de Dados e Armazenar as Configuraçoes
         /// </summary>
-        public static void CreateFileDefault()
+        public static void CreateFileDB_Default()
         {
             var DirectoryName = (System.IO.Directory.GetCurrentDirectory());
             var DirectoryName_FileName = (System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
             var FileNameSemExtencao = (System.IO.Path.GetFileNameWithoutExtension(DirectoryName_FileName));
             var Extencao = (".db3");
             var FileNameComExtencao = (System.IO.Path.Combine((DirectoryName), ((FileNameSemExtencao) + (Extencao))));
-            var PasswdHex = (HOYLER.Data.SQLite.H_SQLiteDatabaseHexPassword.H_GetBytes("balada"));
+            var PasswdHex = (HOYLER.Data.SQLite.H_SQLiteDatabaseHexPassword.GetBytes("balada"));
+
+
             H_SQLiteConnectionStringBuilder Parametros = new H_SQLiteConnectionStringBuilder()
             {
                 @StringBuilder_1_SetDataSource = (FileNameComExtencao),
-                @StringBuilder_2_SetHexPassword = (PasswdHex),
-                @StringBuilder_3_SetFailIfMissing = (false)
+                @StringBuilder_3_SetPassword = ("balada"),
+                @StringBuilder_4_SetFailIfMissing = (false)
             };
             HOYLER.Data.SQLite.H_SQLiteDatabase.CreateFileDB(Parametros: Parametros);
         }
+        /// <summary>
+        /// #H Metodo SQLExecuteNonQuery_Default() Roda Somente no Banco Default
+        /// </summary>
+        /// <param name="ParametroSQL">Parametro StringBuilder</param>
+        public static void SQLExecuteNonQuery_Default(System.Text.StringBuilder ParametroSQL)
+        {
+            var DirectoryName = (System.IO.Directory.GetCurrentDirectory());
+            var DirectoryName_FileName = (System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+            var FileNameSemExtencao = (System.IO.Path.GetFileNameWithoutExtension(DirectoryName_FileName));
+            var Extencao = (".db3");
+            var FileNameComExtencao = (System.IO.Path.Combine((DirectoryName), ((FileNameSemExtencao) + (Extencao))));
+            var PasswdHex = (HOYLER.Data.SQLite.H_SQLiteDatabaseHexPassword.GetBytes("balada"));
+
+
+            H_SQLiteConnectionStringBuilder Parametros = new H_SQLiteConnectionStringBuilder()
+            {
+                @StringBuilder_1_SetDataSource = (FileNameComExtencao),
+                @StringBuilder_3_SetPassword = ("balada")
+            };
+            var msg = (System.String.Empty);
+            HOYLER.Data.SQLite.H_SQLiteDatabase.SQLExecuteNonQuery(
+                                                          Parametros: Parametros,
+                                                          ParametroSQL: ParametroSQL
+                                                          );
+            System.Windows.Forms.MessageBox.Show(msg);
+        }
+        ///// <summary>
+        ///// #H Metodo ExecuteSQL_ReturnDataset_Default
+        ///// </summary>
+        ///// <param name="ParametroSQL">Parametro StringBuilder</param>
+        //public static void ExecuteSQL_ReturnDataset_Default(System.Text.StringBuilder ParametroSQL)
+        //{
+ 
+        //    var DirectoryName = (System.IO.Directory.GetCurrentDirectory());
+        //    var DirectoryName_FileName = (System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+        //    var FileNameSemExtencao = (System.IO.Path.GetFileNameWithoutExtension(DirectoryName_FileName));
+        //    var Extencao = (".db3");
+        //    var FileNameComExtencao = (System.IO.Path.Combine((DirectoryName), ((FileNameSemExtencao) + (Extencao))));
+        //    var PasswdHex = (HOYLER.Data.SQLite.H_SQLiteDatabaseHexPassword.GetBytes("balada"));
+        //    H_SQLiteConnectionStringBuilder Parametros = new H_SQLiteConnectionStringBuilder()
+        //    {
+        //        @StringBuilder_1_SetDataSource = (FileNameComExtencao),
+        //        @StringBuilder_3_SetPassword = ("balada")
+        //    };
+        //    var ParametroSaida = (String.Empty);
+        //    var ds = HOYLER.Data.SQLite.H_SQLiteDatabase.ExecuteSQL_ReturnDataset
+        //    (
+        //    @Parametros: Parametros,
+        //    @ParametroSQL: ParametroSQL,
+        //    ParametroSaida: ref ParametroSaida
+        //    );
+            
+
+
+
+        //}
     }
 }

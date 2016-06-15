@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.btn_CreateDB = new System.Windows.Forms.Button();
             this.dtv_Principal = new System.Windows.Forms.DataGridView();
             this.btn_dell = new System.Windows.Forms.Button();
             this.btn_Update = new System.Windows.Forms.Button();
@@ -37,15 +37,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.dtv_Principal)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // btn_CreateDB
             // 
-            this.button1.Location = new System.Drawing.Point(0, 308);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(93, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Criar DB SQLite";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btn_CreateDB.Location = new System.Drawing.Point(0, 308);
+            this.btn_CreateDB.Name = "btn_CreateDB";
+            this.btn_CreateDB.Size = new System.Drawing.Size(93, 23);
+            this.btn_CreateDB.TabIndex = 0;
+            this.btn_CreateDB.Text = "Criar DB SQLite";
+            this.btn_CreateDB.UseVisualStyleBackColor = true;
+            this.btn_CreateDB.Click += new System.EventHandler(this.btn_CreateDB_Click);
             // 
             // dtv_Principal
             // 
@@ -106,7 +106,7 @@
             this.Controls.Add(this.btn_Update);
             this.Controls.Add(this.btn_dell);
             this.Controls.Add(this.dtv_Principal);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btn_CreateDB);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmPrincipal";
@@ -119,7 +119,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_CreateDB;
         private System.Windows.Forms.DataGridView dtv_Principal;
         private System.Windows.Forms.Button btn_dell;
         private System.Windows.Forms.Button btn_Update;

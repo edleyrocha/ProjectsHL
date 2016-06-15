@@ -13,8 +13,8 @@
  *
 **/
 #endregion
-using System;
-using System.Data.SQLite;
+//using System;
+//using System.Data.SQLite;
 namespace HOYLER.Data.SQLite
 {
     /// <summary>
@@ -39,8 +39,8 @@ namespace HOYLER.Data.SQLite
         {
             _stringBuilder.Clear();
             _stringBuilder.SetDefaults = (true);
-            _stringBuilder.FailIfMissing = (true);
-            _stringBuilder.ForeignKeys = (true); // Segurança por Padrao Nao Pemite Criar 
+            _stringBuilder.FailIfMissing = (true); // Segurança por Padrao Nao Pemite Criar novo DB
+            _stringBuilder.ForeignKeys = (true); 
             _stringBuilder.DefaultTimeout = (5000);
             _stringBuilder.PageSize = (65536);
             _stringBuilder.CacheSize = (2048000);
@@ -53,35 +53,35 @@ namespace HOYLER.Data.SQLite
         /// </summary>
         private System.Data.SQLite.SQLiteConnectionStringBuilder _stringBuilder = new System.Data.SQLite.SQLiteConnectionStringBuilder();
         /// <summary>
-        /// # Metodo Retorno _stringBuilder
+        /// #H Metodo Retorno _stringBuilder
         /// </summary>
         public System.Data.SQLite.SQLiteConnectionStringBuilder GetStringBuilder
         {
             get { return _stringBuilder; }
         }
         /// <summary>
-        /// # Metodo Set DataSource
+        /// #H Metodo Set DataSource
         /// </summary>
         public string StringBuilder_1_SetDataSource
         {
             set { _stringBuilder.DataSource = value; }
         }
         /// <summary>
-        /// # Metodo Set HexPassword
+        /// #H Metodo Set HexPassword
         /// </summary>
         public byte[] StringBuilder_2_SetHexPassword
         {
             set { _stringBuilder.HexPassword = value; }
         }
         /// <summary>
-        /// # Metodo Set Password
+        /// #H Metodo Set Password
         /// </summary>
         public string StringBuilder_3_SetPassword
         {
             set { _stringBuilder.Password = value; }
         }
         /// <summary>
-        /// # Metodo Set FailIfMissing
+        /// #H Metodo Set FailIfMissing
         /// </summary>
         public bool StringBuilder_4_SetFailIfMissing
         {

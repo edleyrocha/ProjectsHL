@@ -162,7 +162,7 @@ namespace HOYLER.Data.SQLite
         /// <param name="Parametros">Parametros H_SQLiteConnectionStringBuilder </param>
         /// <param name="ParametroSQL">Parametros StringBuilder </param>
         /// <returns></returns>
-        public static string SQLExecuteNonQuery(H_SQLiteConnectionStringBuilder Parametros, System.Text.StringBuilder ParametroSQL)
+        public static string SQLExecuteNonQuery(H_SQLiteConnectionStringBuilder Parametros, String ParametroSQL)
         {
             //Default Return
             var myReturn = (String.Empty);
@@ -190,8 +190,9 @@ namespace HOYLER.Data.SQLite
                     {
                         cmdSQL.CommandType = (System.Data.CommandType.Text);
                         cmdSQL.CommandTimeout = (3);
-                        cmdSQL.CommandText = (ParametroSQL.ToString());
+                        cmdSQL.CommandText = (ParametroSQL);
                         var count_I = (0);
+
                         SQLiteConn.Open();
 
                         count_I = (cmdSQL.ExecuteNonQuery());
@@ -337,45 +338,56 @@ namespace HOYLER.Data.SQLite
         /// <summary>
         /// #H Metodo para Criar Default Banco de Dados e Armazenar as Configuraçoes
         /// </summary>
-        public static void CreateFileDBDefault()
+        /// 
+        public static string CreateFileDBDefault()
         {
+            //Default Return
+            var myReturn = (String.Empty);
+
             var DirectoryName = (System.IO.Directory.GetCurrentDirectory());
             var DirectoryName_FileName = (System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
             var FileNameSemExtencao = (System.IO.Path.GetFileNameWithoutExtension(DirectoryName_FileName));
             var Extencao = (".db3");
             var FileNameComExtencao = (System.IO.Path.Combine((DirectoryName), ((FileNameSemExtencao) + (Extencao))));
+            var Passwd = ("balada");
             H_SQLiteConnectionStringBuilder Parametros = new H_SQLiteConnectionStringBuilder()
             {
                 @StringBuilder_1_SetDataSource = (FileNameComExtencao),
-                @StringBuilder_3_SetPassword = ("balada"),
-                @StringBuilder_4_SetFailIfMissing = (false)
+                @StringBuilder_3_SetPassword = (Passwd),
+                @StringBuilder_4_SetFailIfMissing = (false) //CREATE IF NOT EXIST
             };
-            HOYLER.Data.SQLite.H_SQLiteDatabase.CreateFileDB(Parametros: Parametros);
+
+            myReturn = (HOYLER.Data.SQLite.H_SQLiteDatabase.CreateFileDB(Parametros: Parametros));
+            //Retorno do metodo
+            return (myReturn);
         }
         /// <summary>
         /// #H Metodo SQLExecuteNonQueryDefault() Roda Somente no Banco Default
         /// </summary>
         /// <param name="ParametroSQL">Parametro StringBuilder</param>
-        public static void SQLExecuteNonQueryDefault(System.Text.StringBuilder ParametroSQL)
+        public static string SQLExecuteNonQueryDefault(String ParametroSQL)
         {
+            //Default Return
+            var myReturn = (String.Empty);
+
             var DirectoryName = (System.IO.Directory.GetCurrentDirectory());
             var DirectoryName_FileName = (System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
             var FileNameSemExtencao = (System.IO.Path.GetFileNameWithoutExtension(DirectoryName_FileName));
             var Extencao = (".db3");
             var FileNameComExtencao = (System.IO.Path.Combine((DirectoryName), ((FileNameSemExtencao) + (Extencao))));
-            var PasswdHex = (HOYLER.Data.SQLite.H_SQLiteDatabaseHexPassword.GetBytes("balada"));
-
+            var Passwd = ("balada");
 
             H_SQLiteConnectionStringBuilder Parametros = new H_SQLiteConnectionStringBuilder()
             {
                 @StringBuilder_1_SetDataSource = (FileNameComExtencao),
-                @StringBuilder_3_SetPassword = ("balada")
+                @StringBuilder_3_SetPassword = (Passwd)
             };
-            var msg = (System.String.Empty);
-            HOYLER.Data.SQLite.H_SQLiteDatabase.SQLExecuteNonQuery(
-                                                          Parametros: Parametros,
-                                                          ParametroSQL: ParametroSQL
-                                                          );
-         }
+            myReturn = (HOYLER.Data.SQLite.H_SQLiteDatabase.SQLExecuteNonQuery(
+                                                                               Parametros: Parametros,
+                                                                               ParametroSQL: ParametroSQL
+                                                                               ));
+            //Retorno do metodo
+            return (myReturn);
+        }
     }
 }

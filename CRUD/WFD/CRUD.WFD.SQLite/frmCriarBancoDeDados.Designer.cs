@@ -190,7 +190,7 @@
             // 
             // btn_CriarDefaultDB
             // 
-            this.btn_CriarDefaultDB.Location = new System.Drawing.Point(271, 25);
+            this.btn_CriarDefaultDB.Location = new System.Drawing.Point(272, 25);
             this.btn_CriarDefaultDB.Name = "btn_CriarDefaultDB";
             this.btn_CriarDefaultDB.Size = new System.Drawing.Size(102, 23);
             this.btn_CriarDefaultDB.TabIndex = 5;

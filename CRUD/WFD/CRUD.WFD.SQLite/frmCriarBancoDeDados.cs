@@ -145,46 +145,61 @@ namespace CRUD.WFD.SQLite
 
         private void btn_CriarDefaultDB_Click(object sender, EventArgs e)
         {
-            HOYLER.Data.SQLite.H_SQLiteDatabase.CreateFileDBDefault();
+            var resultCreate = ( HOYLER.Data.SQLite.H_SQLiteDatabase.CreateFileDBDefault());
+            var msgTitle = ("Banco de Dados");
+            var msgText = ("Criado com Sucesso");
+            if (resultCreate == "OK")
+            {
+                MessageBox.Show(msgText, msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show(resultCreate, msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btn_ExecuteDefaultComman_Click(object sender, EventArgs e)
         {
-            var ParametroSQL = new System.Text.StringBuilder();
-            String str = rtb_CommandSQL.Text;
-            str = str.Replace("\n", "");
-            ParametroSQL.Append(str.Trim());
-            HOYLER.Data.SQLite.H_SQLiteDatabase.SQLExecuteNonQueryDefault(ParametroSQL: ParametroSQL);
+            var ParametroSQL = (rtb_CommandSQL.Text);
 
+            var resultCreate = (HOYLER.Data.SQLite.H_SQLiteDatabase.SQLExecuteNonQueryDefault(ParametroSQL: ParametroSQL));
+            var msgTitle = ("Banco de Dados");
+            var msgText = ("Criado com Sucesso");
+            if (resultCreate == "OK")
+            {
+                MessageBox.Show(msgText, msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show(resultCreate, msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btn_ExecComGrid_Click(object sender, EventArgs e)
         {
-            var ParametroSQL = (String.Empty);
-            ParametroSQL = (rtb_CommandSQL.Text);
-
+            var ParametroSQL = (rtb_CommandSQL.Text);
             var DirectoryName = (System.IO.Directory.GetCurrentDirectory());
             var DirectoryName_FileName = (System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
             var FileNameSemExtencao = (System.IO.Path.GetFileNameWithoutExtension(DirectoryName_FileName));
             var Extencao = (".db3");
             var FileNameComExtencao = (System.IO.Path.Combine((DirectoryName), ((FileNameSemExtencao) + (Extencao))));
-            var PasswdHex = (HOYLER.Data.SQLite.H_SQLiteDatabaseHexPassword.GetBytes("balada"));
-            H_SQLiteConnectionStringBuilder Parametros = new H_SQLiteConnectionStringBuilder()
+            //var PasswdHex = (HOYLER.Data.SQLite.H_SQLiteDatabaseHexPassword.GetBytes("balada"));
+            H_SQLiteConnectionStringBuilder Parametros = (new H_SQLiteConnectionStringBuilder()
             {
                 @StringBuilder_1_SetDataSource = (FileNameComExtencao),
                 @StringBuilder_3_SetPassword = ("balada")
-            };
+            });
             var ParametroSaida = (String.Empty);
-            var ds = HOYLER.Data.SQLite.H_SQLiteDatabase.ExecuteSQLReturnDataset
+            var ds = (HOYLER.Data.SQLite.H_SQLiteDatabase.ExecuteSQLReturnDataset
             (
             @Parametros: Parametros,
             @ParametroSQL: ParametroSQL,
-            ParametroSaida: ref ParametroSaida
-            );
-            int numero = ds.Tables.Count;
-            if (numero >=1)
+            @ParametroSaida: ref ParametroSaida
+            ));
+            int numero = (ds.Tables.Count);
+            if (numero >= 1)
             {
-                grv_Principal.DataSource = ds.Tables[0];
+                grv_Principal.DataSource = (ds.Tables[0]);
             }
         }
     }

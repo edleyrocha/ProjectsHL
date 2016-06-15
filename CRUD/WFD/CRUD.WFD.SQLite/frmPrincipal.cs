@@ -17,7 +17,7 @@ namespace CRUD.WFD.SQLite
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btn_CreateDB_Click(object sender, EventArgs e)
         {
             var f = new frmCriarBancoDeDados();
             f.ShowDialog();

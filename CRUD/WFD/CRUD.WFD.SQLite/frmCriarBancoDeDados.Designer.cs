@@ -36,7 +36,6 @@
             this.checkBox_Senha = new System.Windows.Forms.CheckBox();
             this.textBox_Senha = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.comboBox_Tipo_Backup = new System.Windows.Forms.ComboBox();
             this.btn_Backup = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btn_ir_Backup = new System.Windows.Forms.Button();
@@ -46,6 +45,7 @@
             this.grv_Principal = new System.Windows.Forms.DataGridView();
             this.btn_ExecComGrid = new System.Windows.Forms.Button();
             this.rtb_CommandSQL = new System.Windows.Forms.RichTextBox();
+            this.cBox_TipoBackup = new System.Windows.Forms.ComboBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grv_Principal)).BeginInit();
@@ -128,7 +128,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.comboBox_Tipo_Backup);
+            this.groupBox2.Controls.Add(this.cBox_TipoBackup);
             this.groupBox2.Controls.Add(this.btn_Backup);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.btn_ir_Backup);
@@ -140,21 +140,9 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Criar Backup";
             // 
-            // comboBox_Tipo_Backup
-            // 
-            this.comboBox_Tipo_Backup.FormattingEnabled = true;
-            this.comboBox_Tipo_Backup.Items.AddRange(new object[] {
-            "Mover Banco de Dados",
-            "Copiar Banco de Dados"});
-            this.comboBox_Tipo_Backup.Location = new System.Drawing.Point(6, 58);
-            this.comboBox_Tipo_Backup.Name = "comboBox_Tipo_Backup";
-            this.comboBox_Tipo_Backup.Size = new System.Drawing.Size(152, 21);
-            this.comboBox_Tipo_Backup.TabIndex = 5;
-            this.comboBox_Tipo_Backup.Text = "Escolha o tipo de Backup";
-            // 
             // btn_Backup
             // 
-            this.btn_Backup.Location = new System.Drawing.Point(164, 58);
+            this.btn_Backup.Location = new System.Drawing.Point(138, 58);
             this.btn_Backup.Name = "btn_Backup";
             this.btn_Backup.Size = new System.Drawing.Size(75, 23);
             this.btn_Backup.TabIndex = 4;
@@ -238,6 +226,14 @@
             this.rtb_CommandSQL.TabIndex = 9;
             this.rtb_CommandSQL.Text = "";
             // 
+            // cBox_TipoBackup
+            // 
+            this.cBox_TipoBackup.FormattingEnabled = true;
+            this.cBox_TipoBackup.Location = new System.Drawing.Point(6, 59);
+            this.cBox_TipoBackup.Name = "cBox_TipoBackup";
+            this.cBox_TipoBackup.Size = new System.Drawing.Size(126, 21);
+            this.cBox_TipoBackup.TabIndex = 5;
+            // 
             // frmCriarBancoDeDados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -278,11 +274,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btn_ir_Backup;
         private System.Windows.Forms.TextBox textBox_CaminhoBackup;
-        private System.Windows.Forms.ComboBox comboBox_Tipo_Backup;
         private System.Windows.Forms.Button btn_CriarDefaultDB;
         private System.Windows.Forms.Button btn_ExecuteDefaultComman;
         private System.Windows.Forms.DataGridView grv_Principal;
         private System.Windows.Forms.Button btn_ExecComGrid;
         private System.Windows.Forms.RichTextBox rtb_CommandSQL;
+        private System.Windows.Forms.ComboBox cBox_TipoBackup;
     }
 }

@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SQLite\H_SQLiteBackup.cs" />
     <Compile Include="SQLite\H_SQLiteConnectionStringBuilder.cs" />
     <Compile Include="SQLite\H_SQLiteDatabase.cs" />
     <Compile Include="SQLite\H_SQLiteDatabaseHexPassword.cs" />

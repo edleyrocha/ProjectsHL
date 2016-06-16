@@ -30,94 +30,18 @@ namespace HOYLER.Data.SQLite
         {
         }
         /// <summary>
-        /// #H Metodo para BackupDB via Copy
+        /// #H Metodo CreateFileDB() - Criar Banco de Dados (Melhor Montodo)
         /// </summary>
-        /// <param name="myDataSource"> Patch Source</param>
-        /// <param name="myMoveBD">Move or NOT Move</param>
-        /// <returns>Retorna string </returns>
-        public static string BackupCopyDB(String myDataSource, Boolean myMoveBD)
-        {
-            //String Retorno Padrao
-            var myReturn = (String.Empty);
-            try
-            {
-                // Check File (myDataSource) EXIST
-                if (!System.IO.File.Exists(myDataSource))
-                {
-                    /// Check File (myDataSource) NOT EXIST - ERRO
-                    throw new System.ArgumentException("Erro File Source Nao Existe (00001)", "Metodo BackupCopyDB()");
-                }
-
-                //SET Pasta Default para BackupDB
-                var BackupDB_Folder = (System.IO.Path.GetDirectoryName(myDataSource));
-                BackupDB_Folder = (System.IO.Path.Combine((BackupDB_Folder), (@"BackupDB\")));
-
-                // Criar Diretorio
-                System.IO.Directory.CreateDirectory(BackupDB_Folder);
-
-                // Check DirectoryName (\BackupDB) EXIST
-                if (!System.IO.Directory.Exists(BackupDB_Folder))
-                {
-                    // Check DirectoryName (\BackupDB) NOT EXIST - ERRO
-                    throw new System.ArgumentException("Erro ao Criar pasta BackupDB (00002)", "Metodo BackupCopyDB()");
-                }
-
-                //Veriaveis para Backup
-                var fileName = (System.IO.Path.GetFileName(myDataSource));
-                var patchDiretory = (System.IO.Path.GetDirectoryName(myDataSource));
-                var dateNow = (DateTime.Now);
-
-                //Set Format for File
-                var DestfileName = (String.Format(("{0}{1}{2}{3}"), (BackupDB_Folder), ("Backup_"), (dateNow.ToString("DATE_dd_MM_yyyy_T_HH_mm_ss_fff_")), (fileName)));
-
-                //Verifica Move(true) 
-                //Verifica Copia(false)
-                switch (myMoveBD)
-                {
-                    case (true)://Move
-                        {
-                            // Move File 
-                            System.IO.File.Move((myDataSource), (DestfileName));
-                            break;
-                        }
-                    case (false): //Copy
-                        {
-                            // Copy File 
-                            System.IO.File.Copy((myDataSource), (DestfileName));
-                            break;
-                        }
-                }
-
-                // Check if File Exist
-                if (!System.IO.File.Exists(DestfileName))
-                {
-                    throw new System.ArgumentException("Erro BACKUP nao Encontrado (00003)", "Metodo BackupCopyDB()");
-                }
-                else if (System.IO.File.Exists(DestfileName))
-                {
-                    myReturn = (String.Format(("{0}"), ("OK")));
-                }
-            }
-            catch (Exception myEx)
-            {
-                // Retornar Erro
-                myReturn = (String.Format(("Erro:\n{0}"), (myEx.ToString())));
-            }
-            return (myReturn);
-        }
-        /// <summary>
-        /// #H Metodo para Criar Banco de Dados (Melhor Metodo)
-        /// </summary>
-        /// <param name="Parametros"> SQLiteConnectionStringBuilder como Parametro</param>
+        /// <param name="myParametros">SQLiteConnectionStringBuilder como Parametro</param>
         /// <returns>Retorna string</returns>
-        public static string CreateFileDB(H_SQLiteConnectionStringBuilder Parametros)
+        public static string CreateFileDB(H_SQLiteConnectionStringBuilder myParametros)
         {
             //Default Return
             var myReturn = (String.Empty);
             try
             {
-                // File Patch via Parametros
-                var FilePatch = (Parametros.GetStringBuilder.DataSource);
+                // File Patch via myParametro
+                var FilePatch = (@myParametros.GetStringBuilder.DataSource);
                 // Check DirectoryName Exists
                 var DirectoryName = (System.IO.Path.GetDirectoryName(FilePatch));
                 if (!System.IO.Directory.Exists(DirectoryName))
@@ -132,7 +56,7 @@ namespace HOYLER.Data.SQLite
                     throw new System.ArgumentException("Erro File Name (00002) Exists", "Metodo CreateFileDB()");
                 };
                 // Cria Banco de Dados
-                using (var SQLiteConn = (new System.Data.SQLite.SQLiteConnection(Parametros.GetStringBuilder.ConnectionString)))
+                using (var SQLiteConn = (new System.Data.SQLite.SQLiteConnection(@myParametros.GetStringBuilder.ConnectionString)))
                 {
                     // Testa se abre e Fecha
                     SQLiteConn.Open();
@@ -159,17 +83,17 @@ namespace HOYLER.Data.SQLite
         /// <summary>
         /// #H Metodo SQLExecuteNonQuery()
         /// </summary>
-        /// <param name="Parametros">Parametros H_SQLiteConnectionStringBuilder </param>
-        /// <param name="ParametroSQL">Parametros StringBuilder </param>
+        /// <param name="myParametro">myParametro H_SQLiteConnectionStringBuilder </param>
+        /// <param name="myParametroSQL">myParametro StringBuilder </param>
         /// <returns></returns>
-        public static string SQLExecuteNonQuery(H_SQLiteConnectionStringBuilder Parametros, String ParametroSQL)
+        public static string SQLExecuteNonQuery(H_SQLiteConnectionStringBuilder myParametros, String myParametroSQL)
         {
             //Default Return
             var myReturn = (String.Empty);
             try
             {
-                // File Patch via Parametros
-                var FilePatch = (Parametros.GetStringBuilder.DataSource);
+                // File Patch via myParametro
+                var FilePatch = (myParametros.GetStringBuilder.DataSource);
                 // Check DirectoryName Exists
                 var DirectoryName = (System.IO.Path.GetDirectoryName(FilePatch));
                 if (!System.IO.Directory.Exists(DirectoryName))
@@ -184,13 +108,14 @@ namespace HOYLER.Data.SQLite
                     throw new System.ArgumentException("Erro File Name (00002) NOT Exists", "Metodo SQLExecuteNonQuery()");
                 };
                 // Abrir Banco de Dados
-                using (var SQLiteConn = (new System.Data.SQLite.SQLiteConnection(Parametros.GetStringBuilder.ConnectionString)))
+                using (var SQLiteConn = (new System.Data.SQLite.SQLiteConnection(myParametros.GetStringBuilder.ConnectionString)))
                 {
+
                     using (var cmdSQL = new System.Data.SQLite.SQLiteCommand(SQLiteConn))
                     {
                         cmdSQL.CommandType = (System.Data.CommandType.Text);
                         cmdSQL.CommandTimeout = (3);
-                        cmdSQL.CommandText = (ParametroSQL);
+                        cmdSQL.CommandText = (myParametroSQL);
                         var count_I = (0);
 
                         SQLiteConn.Open();
@@ -220,18 +145,18 @@ namespace HOYLER.Data.SQLite
         /// <summary>
         /// #H Metodo ExecuteSQLReturnDataset()
         /// </summary>
-        /// <param name="Parametros">Parametros de Conexao</param>
-        /// <param name="ParametroSQL"> Parametros SQL</param>
-        /// <param name="ParametroSaida"> Parametro de Saida </param>
-        /// <returns></returns>
-        public static System.Data.DataSet ExecuteSQLReturnDataset(H_SQLiteConnectionStringBuilder Parametros, String ParametroSQL, ref String ParametroSaida)
+        /// <param name="myParametros">Conexao</param>
+        /// <param name="myParametroSQL">SQL</param>
+        /// <param name="myParametroSaida">Saida </param>
+        /// <returns>>Retorna Data Table</returns>
+        public static System.Data.DataSet ExecuteSQLReturnDataset(H_SQLiteConnectionStringBuilder myParametros, String myParametroSQL, ref String myParametroSaida)
         {
             //Default Return
             var myReturn = (new System.Data.DataSet());
             try
             {
-                // File Patch via Parametros
-                var FilePatch = (Parametros.GetStringBuilder.DataSource);
+                // File Patch via myParametro
+                var FilePatch = (myParametros.GetStringBuilder.DataSource);
                 // Check DirectoryName Exists
                 var DirectoryName = (System.IO.Path.GetDirectoryName(FilePatch));
                 if (!System.IO.Directory.Exists(DirectoryName))
@@ -246,13 +171,13 @@ namespace HOYLER.Data.SQLite
                     throw new System.ArgumentException("Erro File Name (00002) NOT Exists", "Metodo ExecuteSQLReturnDataset()");
                 };
                 // Abrir Banco de Dados
-                using (var SQLiteConn = (new System.Data.SQLite.SQLiteConnection(Parametros.GetStringBuilder.ConnectionString)))
+                using (var SQLiteConn = (new System.Data.SQLite.SQLiteConnection(myParametros.GetStringBuilder.ConnectionString)))
                 {
                     using (var cmdSQL = new System.Data.SQLite.SQLiteCommand(SQLiteConn))
                     {
                         cmdSQL.CommandType = (System.Data.CommandType.Text);
                         cmdSQL.CommandTimeout = (3);
-                        cmdSQL.CommandText = (ParametroSQL);
+                        cmdSQL.CommandText = (myParametroSQL);
                         using (var adapterSQL = new System.Data.SQLite.SQLiteDataAdapter(cmdSQL))
                         {
                             SQLiteConn.Open();
@@ -271,7 +196,7 @@ namespace HOYLER.Data.SQLite
             catch (Exception myEx)
             {
                 //Retorno de Erro
-                ParametroSaida = (String.Format(("Erro:\n{0}"), (myEx.ToString())));
+                myParametroSaida = (String.Format(("Erro:\n{0}"), (myEx.ToString())));
             }
             //Retorno do metodo
             return (myReturn);
@@ -279,18 +204,18 @@ namespace HOYLER.Data.SQLite
         /// <summary>
         /// #H Metodo ExecuteSQLReturnDataTable()
         /// </summary>
-        /// <param name="Parametros">Parametros de Conexao</param>
-        /// <param name="ParametroSQL"> Parametros SQL</param>
-        /// <param name="ParametroSaida"> Parametro de Saida </param>
-        /// <returns></returns>
-        public static System.Data.DataTable ExecuteSQLReturnDataTable(H_SQLiteConnectionStringBuilder Parametros, System.Text.StringBuilder ParametroSQL, ref string ParametroSaida)
+        /// <param name="myParametros">Conexao</param>
+        /// <param name="myParametroSQL">SQL</param>
+        /// <param name="myParametroSaida">Saida </param>
+        /// <returns>Retorna Data Table</returns>
+        public static System.Data.DataTable ExecuteSQLReturnDataTable(H_SQLiteConnectionStringBuilder myParametros, System.Text.StringBuilder myParametroSQL, ref string myParametroSaida)
         {
             //Default Return
             var myReturn = (new System.Data.DataTable());
             try
             {
-                // File Patch via Parametros
-                var FilePatch = (Parametros.GetStringBuilder.DataSource);
+                // File Patch via myParametro
+                var FilePatch = (myParametros.GetStringBuilder.DataSource);
                 // Check DirectoryName Exists
                 var DirectoryName = (System.IO.Path.GetDirectoryName(FilePatch));
                 if (!System.IO.Directory.Exists(DirectoryName))
@@ -305,13 +230,13 @@ namespace HOYLER.Data.SQLite
                     throw new System.ArgumentException("Erro File Name (00002) NOT Exists", "Metodo ExecuteSQLReturnDataTable()");
                 };
                 // Abrir Banco de Dados
-                using (var SQLiteConn = (new System.Data.SQLite.SQLiteConnection(Parametros.GetStringBuilder.ConnectionString)))
+                using (var SQLiteConn = (new System.Data.SQLite.SQLiteConnection(myParametros.GetStringBuilder.ConnectionString)))
                 {
                     using (var cmdSQL = new System.Data.SQLite.SQLiteCommand(SQLiteConn))
                     {
                         cmdSQL.CommandType = (System.Data.CommandType.Text);
                         cmdSQL.CommandTimeout = (3);
-                        cmdSQL.CommandText = (ParametroSQL.ToString());
+                        cmdSQL.CommandText = (myParametroSQL.ToString());
                         using (var adapterSQL = new System.Data.SQLite.SQLiteDataAdapter(cmdSQL))
                         {
                             SQLiteConn.Open();
@@ -330,15 +255,15 @@ namespace HOYLER.Data.SQLite
             catch (Exception myEx)
             {
                 //Retorno de Erro
-                ParametroSaida = (String.Format(("Erro:\n{0}"), (myEx.ToString())));
+                myParametroSaida = (String.Format(("Erro:\n{0}"), (myEx.ToString())));
             }
             //Retorno do metodo
             return (myReturn);
         }
         /// <summary>
-        /// #H Metodo para Criar Default Banco de Dados e Armazenar as Configuraçoes
+        /// #H Metodo CreateFileDBDefault - Criar Default Banco de Dados e Armazenar as Configuraçoes
         /// </summary>
-        /// 
+        /// <returns>Retorna Status</returns>
         public static string CreateFileDBDefault()
         {
             //Default Return
@@ -350,22 +275,24 @@ namespace HOYLER.Data.SQLite
             var Extencao = (".db3");
             var FileNameComExtencao = (System.IO.Path.Combine((DirectoryName), ((FileNameSemExtencao) + (Extencao))));
             var Passwd = ("balada");
+
             H_SQLiteConnectionStringBuilder Parametros = new H_SQLiteConnectionStringBuilder()
             {
-                @StringBuilder_1_SetDataSource = (FileNameComExtencao),
-                @StringBuilder_3_SetPassword = (Passwd),
-                @StringBuilder_4_SetFailIfMissing = (false) //CREATE IF NOT EXIST
+                SetStringBuilder1_DataSource = (FileNameComExtencao),
+                SetStringBuilder2_Password = (Passwd),
+                SetStringBuilder3_FailIfMissing = (false) //CREATE IF NOT EXIST
             };
 
-            myReturn = (HOYLER.Data.SQLite.H_SQLiteDatabase.CreateFileDB(Parametros: Parametros));
+            myReturn = (HOYLER.Data.SQLite.H_SQLiteDatabase.CreateFileDB(myParametros: Parametros));
             //Retorno do metodo
             return (myReturn);
         }
         /// <summary>
-        /// #H Metodo SQLExecuteNonQueryDefault() Roda Somente no Banco Default
+        /// #H Metodo SQLExecuteNonQueryDefault() - Roda Somente no Banco Default
         /// </summary>
-        /// <param name="ParametroSQL">Parametro StringBuilder</param>
-        public static string SQLExecuteNonQueryDefault(String ParametroSQL)
+        /// <param name="myParametroSQL">String como Parametros</param>
+        /// <returns>Retorna Status</returns>
+        public static string SQLExecuteNonQueryDefault(String myParametroSQL)
         {
             //Default Return
             var myReturn = (String.Empty);
@@ -377,14 +304,15 @@ namespace HOYLER.Data.SQLite
             var FileNameComExtencao = (System.IO.Path.Combine((DirectoryName), ((FileNameSemExtencao) + (Extencao))));
             var Passwd = ("balada");
 
-            H_SQLiteConnectionStringBuilder Parametros = new H_SQLiteConnectionStringBuilder()
+            H_SQLiteConnectionStringBuilder myParametros = new H_SQLiteConnectionStringBuilder()
             {
-                @StringBuilder_1_SetDataSource = (FileNameComExtencao),
-                @StringBuilder_3_SetPassword = (Passwd)
+                @SetStringBuilder1_DataSource = (FileNameComExtencao),
+                @SetStringBuilder2_Password = (Passwd),
             };
+
             myReturn = (HOYLER.Data.SQLite.H_SQLiteDatabase.SQLExecuteNonQuery(
-                                                                               Parametros: Parametros,
-                                                                               ParametroSQL: ParametroSQL
+                                                                               @myParametros: myParametros,
+                                                                               @myParametroSQL: myParametroSQL
                                                                                ));
             //Retorno do metodo
             return (myReturn);

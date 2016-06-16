@@ -13,8 +13,8 @@
  *
 **/
 #endregion
-//using System;
-//using System.Data.SQLite;
+using System;
+using System.Data.SQLite;
 namespace HOYLER.Data.SQLite
 {
     /// <summary>
@@ -33,59 +33,66 @@ namespace HOYLER.Data.SQLite
             this.ConfigureDefault();
         }
         /// <summary>
+        /// #H Field _SQLiteConnStringBuilder SQLiteConnectionStringBuilder
+        /// </summary>
+        private SQLiteConnectionStringBuilder _SQLiteConnStringBuilder = new SQLiteConnectionStringBuilder();
+        /// <summary>
         /// #H Metodo ConfigureDefault()
         /// </summary>
         private void ConfigureDefault()
         {
-            _stringBuilder.Clear();
-            _stringBuilder.SetDefaults = (true);
-            _stringBuilder.FailIfMissing = (true); // Segurança por Padrao Nao Pemite Criar novo DB
-            _stringBuilder.ForeignKeys = (true); 
-            _stringBuilder.DefaultTimeout = (5000);
-            _stringBuilder.PageSize = (65536);
-            _stringBuilder.CacheSize = (2048000);
-            _stringBuilder.SyncMode = (System.Data.SQLite.SynchronizationModes.Full);
-            _stringBuilder.JournalMode = (System.Data.SQLite.SQLiteJournalModeEnum.Memory);
-            _stringBuilder.Flags = (System.Data.SQLite.SQLiteConnectionFlags.LogAll);
+            _SQLiteConnStringBuilder.Clear();
+            _SQLiteConnStringBuilder.SetDefaults = (true);
+            _SQLiteConnStringBuilder.FailIfMissing = (true); // Segurança por Padrao Nao Pemite Criar novo DB
+            _SQLiteConnStringBuilder.ForeignKeys = (true); 
+            _SQLiteConnStringBuilder.DefaultTimeout = (5000);
+            _SQLiteConnStringBuilder.PageSize = (65536);
+            _SQLiteConnStringBuilder.CacheSize = (2048000);
+            _SQLiteConnStringBuilder.SyncMode = (System.Data.SQLite.SynchronizationModes.Full);
+            _SQLiteConnStringBuilder.JournalMode = (System.Data.SQLite.SQLiteJournalModeEnum.Memory);
+            _SQLiteConnStringBuilder.Flags = (System.Data.SQLite.SQLiteConnectionFlags.LogAll);
         }
         /// <summary>
-        /// #H Field _stringBuilder SQLiteConnectionStringBuilder
+        /// #H Metodo Retorno _SQLiteConnStringBuilder
         /// </summary>
-        private System.Data.SQLite.SQLiteConnectionStringBuilder _stringBuilder = new System.Data.SQLite.SQLiteConnectionStringBuilder();
-        /// <summary>
-        /// #H Metodo Retorno _stringBuilder
-        /// </summary>
-        public System.Data.SQLite.SQLiteConnectionStringBuilder GetStringBuilder
+        public SQLiteConnectionStringBuilder GetStringBuilder
         {
-            get { return _stringBuilder; }
+            get { return _SQLiteConnStringBuilder; }
         }
         /// <summary>
         /// #H Metodo Set DataSource
         /// </summary>
-        public string StringBuilder_1_SetDataSource
+        public string SetStringBuilder1_DataSource
         {
-            set { _stringBuilder.DataSource = value; }
+            set { _SQLiteConnStringBuilder.DataSource = value; }
         }
         /// <summary>
         /// #H Metodo Set HexPassword
         /// </summary>
-        public byte[] StringBuilder_2_SetHexPassword
+        public byte[] SetStringBuilder2_HexPassword
         {
-            set { _stringBuilder.HexPassword = value; }
+            set { _SQLiteConnStringBuilder.HexPassword = value; }
         }
         /// <summary>
         /// #H Metodo Set Password
         /// </summary>
-        public string StringBuilder_3_SetPassword
+        public string SetStringBuilder2_Password
         {
-            set { _stringBuilder.Password = value; }
+            set { _SQLiteConnStringBuilder.Password = value; }
         }
         /// <summary>
         /// #H Metodo Set FailIfMissing
         /// </summary>
-        public bool StringBuilder_4_SetFailIfMissing
+        public bool SetStringBuilder3_FailIfMissing
         {
-            set { _stringBuilder.FailIfMissing = value; }
+            set { _SQLiteConnStringBuilder.FailIfMissing = value; }
+        }
+        /// <summary>
+        /// #H Metodo Set ReadOnly
+        /// </summary>
+        public bool SetStringBuilder4_ReadOnly
+        {
+            set { _SQLiteConnStringBuilder.ReadOnly = value; }
         }
     }
 }

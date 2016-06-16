@@ -17,12 +17,25 @@ namespace CRUD.WFD.SQLite
     {
         public frmCriarBancoDeDados()
         {
-            InitializeComponent();
-            textBox_CaminhoCriar.Enabled = !textBox_CaminhoCriar.Enabled;
-            textBox_Senha.Enabled = !textBox_Senha.Enabled;
-            checkBox_Senha.Enabled = !checkBox_Senha.Enabled;
-            btn_BuscarBanco.Enabled = !btn_BuscarBanco.Enabled;
-            btn_CriarBanco.Enabled = !btn_CriarBanco.Enabled;
+            this.InitializeComponent();
+            this.textBox_CaminhoCriar.Enabled = !textBox_CaminhoCriar.Enabled;
+            this.textBox_Senha.Enabled = !textBox_Senha.Enabled;
+            this.checkBox_Senha.Enabled = !checkBox_Senha.Enabled;
+            this.btn_BuscarBanco.Enabled = !btn_BuscarBanco.Enabled;
+            this.btn_CriarBanco.Enabled = !btn_CriarBanco.Enabled;
+            this.cBoxCarregarItens();
+        }
+
+        private void cBoxCarregarItens()
+        {
+            //cBox_TipoBackup.DataSource = Enum.GetValues(typeof(H_SQLiteBackup.EscolhaTipo));
+            cBox_TipoBackup.Text = ("Escolha Modo Backup");
+            foreach (var myItem in Enum.GetValues(typeof(H_SQLiteBackup.EscolhaTipo)))
+            {
+                var myIndex = (int)((H_SQLiteBackup.EscolhaTipo)myItem);
+                cBox_TipoBackup.Items.Insert(index: myIndex, item: myItem);
+                //cBox_TipoBackup.Items.Add(myItem);
+            }
         }
 
         private void checkBox_Caminho_CheckStateChanged(object sender, EventArgs e)
@@ -65,23 +78,37 @@ namespace CRUD.WFD.SQLite
 
         private void btn_Backup_Click(object sender, EventArgs e)
         {
-            var backupIndex = comboBox_Tipo_Backup.SelectedIndex;
-            if (backupIndex == 0)
+
+            var msgResult = (String.Empty);
+            var myDataSource = (textBox_CaminhoBackup.Text);
+            var myBackupIndex = (cBox_TipoBackup.SelectedIndex);
+            var myExecTipo = (H_SQLiteBackup.EscolhaTipo)(myBackupIndex);
+
+            if ((myExecTipo) == (H_SQLiteBackup.EscolhaTipo.Move))
             {
-                var patchBackup = textBox_CaminhoBackup.Text;
-                var msgResult = HOYLER.Data.SQLite.H_SQLiteDatabase.BackupCopyDB(patchBackup, true);
-                System.Windows.Forms.MessageBox.Show(msgResult);
+                msgResult = (HOYLER.Data.SQLite.H_SQLiteBackup.BackupDB(myDataSource: myDataSource, myExecTipo: myExecTipo));
             }
-            else if (backupIndex == 1)
+            else if ((myExecTipo) == (H_SQLiteBackup.EscolhaTipo.Copy))
             {
-                var patchBackup = textBox_CaminhoBackup.Text;
-                var msgResult = HOYLER.Data.SQLite.H_SQLiteDatabase.BackupCopyDB(patchBackup, false);
-                MessageBox.Show(msgResult);
+                msgResult = (HOYLER.Data.SQLite.H_SQLiteBackup.BackupDB(myDataSource: myDataSource, myExecTipo: myExecTipo));
+            }
+            else if ((myExecTipo) == (H_SQLiteBackup.EscolhaTipo.Backup))
+            {
+                var myPassword = ("balada");
+                msgResult = (HOYLER.Data.SQLite.H_SQLiteBackup.BackupDB(myDataSource: myDataSource, myPassword: myPassword, myExecTipo: myExecTipo));
+            };
+
+            var msgTitle = ("Banco de Dados");
+            var msgText = ("Criado com Sucesso");
+
+            if (msgResult == "OK")
+            {
+                MessageBox.Show(msgText, msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show("Outros");
-            }
+                MessageBox.Show(msgResult, msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            };
         }
 
         private void btn_ir_Backup_Click(object sender, EventArgs e)
@@ -109,12 +136,12 @@ namespace CRUD.WFD.SQLite
 
             H_SQLiteConnectionStringBuilder Parametros = new H_SQLiteConnectionStringBuilder()
             {
-                @StringBuilder_1_SetDataSource = (Patch),
-                @StringBuilder_2_SetHexPassword = (PasswdHex),
-                StringBuilder_4_SetFailIfMissing = (false)
+                @SetStringBuilder1_DataSource = (Patch),
+                @SetStringBuilder2_HexPassword = (PasswdHex),
+                @SetStringBuilder3_FailIfMissing = (false)
             };
 
-            var resultCreate = (HOYLER.Data.SQLite.H_SQLiteDatabase.CreateFileDB(Parametros: Parametros));
+            var resultCreate = (HOYLER.Data.SQLite.H_SQLiteDatabase.CreateFileDB(myParametros: Parametros));
             var msgTitle = ("Banco de Dados");
             var msgText = ("Criado com Sucesso");
 
@@ -145,7 +172,7 @@ namespace CRUD.WFD.SQLite
 
         private void btn_CriarDefaultDB_Click(object sender, EventArgs e)
         {
-            var resultCreate = ( HOYLER.Data.SQLite.H_SQLiteDatabase.CreateFileDBDefault());
+            var resultCreate = (HOYLER.Data.SQLite.H_SQLiteDatabase.CreateFileDBDefault());
             var msgTitle = ("Banco de Dados");
             var msgText = ("Criado com Sucesso");
             if (resultCreate == "OK")
@@ -162,7 +189,7 @@ namespace CRUD.WFD.SQLite
         {
             var ParametroSQL = (rtb_CommandSQL.Text);
 
-            var resultCreate = (HOYLER.Data.SQLite.H_SQLiteDatabase.SQLExecuteNonQueryDefault(ParametroSQL: ParametroSQL));
+            var resultCreate = (HOYLER.Data.SQLite.H_SQLiteDatabase.SQLExecuteNonQueryDefault(myParametroSQL: ParametroSQL));
             var msgTitle = ("Banco de Dados");
             var msgText = ("Criado com Sucesso");
             if (resultCreate == "OK")
@@ -183,19 +210,19 @@ namespace CRUD.WFD.SQLite
             var FileNameSemExtencao = (System.IO.Path.GetFileNameWithoutExtension(DirectoryName_FileName));
             var Extencao = (".db3");
             var FileNameComExtencao = (System.IO.Path.Combine((DirectoryName), ((FileNameSemExtencao) + (Extencao))));
-            //var PasswdHex = (HOYLER.Data.SQLite.H_SQLiteDatabaseHexPassword.GetBytes("balada"));
+            var Passwd = ("balada");
             H_SQLiteConnectionStringBuilder Parametros = (new H_SQLiteConnectionStringBuilder()
             {
-                @StringBuilder_1_SetDataSource = (FileNameComExtencao),
-                @StringBuilder_3_SetPassword = ("balada")
+                @SetStringBuilder1_DataSource = (FileNameComExtencao),
+                @SetStringBuilder2_Password = (Passwd)
             });
             var ParametroSaida = (String.Empty);
             var ds = (HOYLER.Data.SQLite.H_SQLiteDatabase.ExecuteSQLReturnDataset
-            (
-            @Parametros: Parametros,
-            @ParametroSQL: ParametroSQL,
-            @ParametroSaida: ref ParametroSaida
-            ));
+                     (
+                     @myParametros: Parametros,
+                     @myParametroSQL: ParametroSQL,
+                     @myParametroSaida: ref ParametroSaida
+                     ));
             int numero = (ds.Tables.Count);
             if (numero >= 1)
             {

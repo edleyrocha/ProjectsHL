@@ -35,7 +35,7 @@ namespace HOYLER.Data.SQLite
         public static byte[] GetBytes(string myString)
         {
             byte[] bytes = (new byte[myString.Length * sizeof(char)]);
-            System.Buffer.BlockCopy(myString.ToCharArray(), 0, bytes, 0, bytes.Length);
+            Buffer.BlockCopy(myString.ToCharArray(), 0, bytes, 0, bytes.Length);
             return (bytes);
         }
         /// <summary>
@@ -46,17 +46,17 @@ namespace HOYLER.Data.SQLite
         public static string GetString(byte[] mybyts)
         {
             char[] chars = (new char[mybyts.Length / sizeof(char)]);
-            System.Buffer.BlockCopy(mybyts, 0, chars, 0, mybyts.Length);
+            Buffer.BlockCopy(mybyts, 0, chars, 0, mybyts.Length);
             return (new string(chars));
         }
         /// <summary>
         /// #H Metodo GetHexString
         /// </summary>
-        /// <param name="byteArray"> Parametro byte[] Array</param>
+        /// <param name="mybyteArray"> Parametro byte[] Array</param>
         /// <returns>Retona String</returns>
-        public static string GetHexString(byte[] byteArray)
+        public static string GetHexString(byte[] mybyteArray)
         {
-            return (System.BitConverter.ToString(byteArray));
+            return (BitConverter.ToString(mybyteArray));
         }
     }
 }

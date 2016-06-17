@@ -188,7 +188,8 @@ namespace CRUD.WFD.SQLite
         private void btn_ExecuteDefaultComman_Click(object sender, EventArgs e)
         {
             var ParametroSQL = (rtb_CommandSQL.Text);
-
+            ParametroSQL = (ParametroSQL.Replace("\t", "").Trim());
+            ParametroSQL = (ParametroSQL.Replace("\n", "").Trim());
             var resultCreate = (HOYLER.Data.SQLite.H_SQLiteDatabase.SQLExecuteNonQueryDefault(myParametroSQL: ParametroSQL));
             var msgTitle = ("Banco de Dados");
             var msgText = ("Criado com Sucesso");
@@ -199,7 +200,7 @@ namespace CRUD.WFD.SQLite
             else
             {
                 MessageBox.Show(resultCreate, msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            };
         }
 
         private void btn_ExecComGrid_Click(object sender, EventArgs e)

@@ -228,7 +228,38 @@ namespace CRUD.WFD.SQLite
             if (numero >= 1)
             {
                 grv_Principal.DataSource = (ds.Tables[0]);
+            };
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var ParametroSQL = (rtb_CommandSQL.Text);
+            var DirectoryName = (System.IO.Directory.GetCurrentDirectory());
+            var DirectoryName_FileName = (System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+            var FileNameSemExtencao = (System.IO.Path.GetFileNameWithoutExtension(DirectoryName_FileName));
+            var Extencao = (".db3");
+            var FileNameComExtencao = (System.IO.Path.Combine((DirectoryName), ((FileNameSemExtencao) + (Extencao))));
+            var Passwd = ("balada");
+            H_SQLiteConnectionStringBuilder Parametros = (new H_SQLiteConnectionStringBuilder()
+            {
+                @SetStringBuilder1_DataSource = (FileNameComExtencao),
+                @SetStringBuilder2_Password = (Passwd)
+            });
+            var ParametroSaida = (String.Empty);
+            var dt = (HOYLER.Data.SQLite.H_SQLiteDatabase.ExecuteSQLReturnDataTable
+                     (
+                     @myParametros: Parametros,
+                     @myParametroSQL: ParametroSQL,
+                     @myParametroSaida: ref ParametroSaida
+                     ));
+            if (dt != null)
+            {
+                if (dt.Rows.Count >= 1)
+                {
+                    grv_Principal.DataSource = (dt);
+                }
             }
+ 
         }
     }
 }

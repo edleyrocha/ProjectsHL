@@ -36,6 +36,7 @@
             this.checkBox_Senha = new System.Windows.Forms.CheckBox();
             this.textBox_Senha = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cBox_TipoBackup = new System.Windows.Forms.ComboBox();
             this.btn_Backup = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btn_ir_Backup = new System.Windows.Forms.Button();
@@ -45,7 +46,7 @@
             this.grv_Principal = new System.Windows.Forms.DataGridView();
             this.btn_ExecComGrid = new System.Windows.Forms.Button();
             this.rtb_CommandSQL = new System.Windows.Forms.RichTextBox();
-            this.cBox_TipoBackup = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grv_Principal)).BeginInit();
@@ -140,6 +141,14 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Criar Backup";
             // 
+            // cBox_TipoBackup
+            // 
+            this.cBox_TipoBackup.FormattingEnabled = true;
+            this.cBox_TipoBackup.Location = new System.Drawing.Point(6, 59);
+            this.cBox_TipoBackup.Name = "cBox_TipoBackup";
+            this.cBox_TipoBackup.Size = new System.Drawing.Size(126, 21);
+            this.cBox_TipoBackup.TabIndex = 5;
+            // 
             // btn_Backup
             // 
             this.btn_Backup.Location = new System.Drawing.Point(138, 58);
@@ -188,11 +197,11 @@
             // 
             // btn_ExecuteDefaultComman
             // 
-            this.btn_ExecuteDefaultComman.Location = new System.Drawing.Point(514, 288);
+            this.btn_ExecuteDefaultComman.Location = new System.Drawing.Point(272, 288);
             this.btn_ExecuteDefaultComman.Name = "btn_ExecuteDefaultComman";
-            this.btn_ExecuteDefaultComman.Size = new System.Drawing.Size(154, 23);
+            this.btn_ExecuteDefaultComman.Size = new System.Drawing.Size(264, 23);
             this.btn_ExecuteDefaultComman.TabIndex = 6;
-            this.btn_ExecuteDefaultComman.Text = "Execute Command";
+            this.btn_ExecuteDefaultComman.Text = "Execute Non Query Command";
             this.btn_ExecuteDefaultComman.UseVisualStyleBackColor = true;
             this.btn_ExecuteDefaultComman.Click += new System.EventHandler(this.btn_ExecuteDefaultComman_Click);
             // 
@@ -209,11 +218,11 @@
             // 
             // btn_ExecComGrid
             // 
-            this.btn_ExecComGrid.Location = new System.Drawing.Point(514, 317);
+            this.btn_ExecComGrid.Location = new System.Drawing.Point(272, 317);
             this.btn_ExecComGrid.Name = "btn_ExecComGrid";
-            this.btn_ExecComGrid.Size = new System.Drawing.Size(154, 23);
+            this.btn_ExecComGrid.Size = new System.Drawing.Size(264, 23);
             this.btn_ExecComGrid.TabIndex = 8;
-            this.btn_ExecComGrid.Text = "Execute Command com Grid";
+            this.btn_ExecComGrid.Text = "Execute Command Dataset Return Grid";
             this.btn_ExecComGrid.UseVisualStyleBackColor = true;
             this.btn_ExecComGrid.Click += new System.EventHandler(this.btn_ExecComGrid_Click);
             // 
@@ -226,19 +235,22 @@
             this.rtb_CommandSQL.TabIndex = 9;
             this.rtb_CommandSQL.Text = "";
             // 
-            // cBox_TipoBackup
+            // button1
             // 
-            this.cBox_TipoBackup.FormattingEnabled = true;
-            this.cBox_TipoBackup.Location = new System.Drawing.Point(6, 59);
-            this.cBox_TipoBackup.Name = "cBox_TipoBackup";
-            this.cBox_TipoBackup.Size = new System.Drawing.Size(126, 21);
-            this.cBox_TipoBackup.TabIndex = 5;
+            this.button1.Location = new System.Drawing.Point(272, 346);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(264, 23);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "Execute Command DataTable Return Grid";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // frmCriarBancoDeDados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(678, 389);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.rtb_CommandSQL);
             this.Controls.Add(this.btn_ExecComGrid);
             this.Controls.Add(this.grv_Principal);
@@ -280,5 +292,6 @@
         private System.Windows.Forms.Button btn_ExecComGrid;
         private System.Windows.Forms.RichTextBox rtb_CommandSQL;
         private System.Windows.Forms.ComboBox cBox_TipoBackup;
+        private System.Windows.Forms.Button button1;
     }
 }

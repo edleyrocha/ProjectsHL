@@ -14,6 +14,7 @@
 **/
 #endregion
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
 namespace HOYLER.Data.SQLite
@@ -34,7 +35,7 @@ namespace HOYLER.Data.SQLite
         /// </summary>
         /// <param name="myParametros">SQLiteConnectionStringBuilder como Parametro</param>
         /// <returns>Retorna string</returns>
-        public static string CreateFileDB(H_SQLiteConnectionStringBuilder myParametros)
+        public static String CreateFileDB(H_SQLiteConnectionStringBuilder myParametros)
         {
             //Default Return
             var myReturn = (String.Empty);
@@ -86,7 +87,7 @@ namespace HOYLER.Data.SQLite
         /// <param name="myParametro">myParametro H_SQLiteConnectionStringBuilder </param>
         /// <param name="myParametroSQL">myParametro StringBuilder </param>
         /// <returns>Return Status</returns>
-        public static string SQLExecuteNonQuery(H_SQLiteConnectionStringBuilder myParametros, String myParametroSQL)
+        public static String SQLExecuteNonQuery(H_SQLiteConnectionStringBuilder myParametros, String myParametroSQL)
         {
             //Default Return
             var myReturn = (String.Empty);
@@ -113,24 +114,24 @@ namespace HOYLER.Data.SQLite
                     using (var cmdSQL = new System.Data.SQLite.SQLiteCommand(SQLiteConn))
                     {
                         cmdSQL.CommandType = (System.Data.CommandType.Text);
-                        cmdSQL.CommandTimeout = (3);
+                        cmdSQL.CommandTimeout = (5);
                         cmdSQL.CommandText = (myParametroSQL);
-                        var count_I = (-666);
+                        var count_I = (0);
                         SQLiteConn.Open();
-                        using (SQLiteTransaction sqliteTransaction = SQLiteConn.BeginTransaction())
+                        using (var SQLiteTransactionBegin = SQLiteConn.BeginTransaction())
                         {
                             count_I = (cmdSQL.ExecuteNonQuery());
-                            sqliteTransaction.Commit();
+                            SQLiteTransactionBegin.Commit();
                         };
-                        if (count_I <= (-1))
+                        if (count_I == (-1))
                         {
                             // Check Exec SQL - ERRO
                             throw new System.ArgumentException("Erro Exec SQL (00003) Erro", "Metodo SQLExecuteNonQuery()");
-                        }
-                    }
+                        };
+                        // Returno de Sucesso
+                        myReturn = (String.Format(("{0}"), ("OK")));
+                    };
                 };
-                // Returno de Sucesso
-                myReturn = (String.Format(("{0}"), ("OK")));
             }
             catch (Exception myEx)
             {
@@ -147,7 +148,7 @@ namespace HOYLER.Data.SQLite
         /// <param name="myParametroSQL">SQL</param>
         /// <param name="myParametroSaida">Saida </param>
         /// <returns>>Retorna Data Table</returns>
-        public static System.Data.DataSet ExecuteSQLReturnDataset(H_SQLiteConnectionStringBuilder myParametros, String myParametroSQL, ref String myParametroSaida)
+        public static DataSet ExecuteSQLReturnDataset(H_SQLiteConnectionStringBuilder myParametros, String myParametroSQL, ref String myParametroSaida)
         {
             //Default Return
             var myReturn = (new System.Data.DataSet());
@@ -174,19 +175,22 @@ namespace HOYLER.Data.SQLite
                     using (var cmdSQL = new System.Data.SQLite.SQLiteCommand(SQLiteConn))
                     {
                         cmdSQL.CommandType = (System.Data.CommandType.Text);
-                        cmdSQL.CommandTimeout = (3);
+                        cmdSQL.CommandTimeout = (5);
                         cmdSQL.CommandText = (myParametroSQL);
                         using (var adapterSQL = new System.Data.SQLite.SQLiteDataAdapter(cmdSQL))
                         {
                             SQLiteConn.Open();
-                            var count_I = (0);
-                            count_I = adapterSQL.Fill(myReturn);
-                            if (count_I <= (-1))
+                            using (var SQLiteTransactionBegin = SQLiteConn.BeginTransaction())
                             {
-                                // Check Exec SQL - ERRO
-                                throw new System.ArgumentException("Erro Exec SQL (00003) Erro", "Metodo ExecuteSQLReturnDataset()");
+                                var count_I = (0);
+                                count_I = adapterSQL.Fill(myReturn);
+                                SQLiteTransactionBegin.Commit();
+                                if (count_I == (-1))
+                                {
+                                    // Check Exec SQL - ERRO
+                                    throw new System.ArgumentException("Erro Exec SQL (00003) Erro", "Metodo ExecuteSQLReturnDataset()");
+                                };
                             };
-                            SQLiteConn.Close();
                         };
                     };
                 };
@@ -206,7 +210,7 @@ namespace HOYLER.Data.SQLite
         /// <param name="myParametroSQL">SQL</param>
         /// <param name="myParametroSaida">Saida </param>
         /// <returns>Retorna Data Table</returns>
-        public static System.Data.DataTable ExecuteSQLReturnDataTable(H_SQLiteConnectionStringBuilder myParametros, System.Text.StringBuilder myParametroSQL, ref string myParametroSaida)
+        public static DataTable ExecuteSQLReturnDataTable(H_SQLiteConnectionStringBuilder myParametros, String myParametroSQL, ref String myParametroSaida)
         {
             //Default Return
             var myReturn = (new System.Data.DataTable());
@@ -238,14 +242,17 @@ namespace HOYLER.Data.SQLite
                         using (var adapterSQL = new System.Data.SQLite.SQLiteDataAdapter(cmdSQL))
                         {
                             SQLiteConn.Open();
-                            var count_I = (0);
-                            count_I = adapterSQL.Fill(myReturn);
-                            if (count_I <= (-1))
+                            using (var SQLiteTransactionBegin = SQLiteConn.BeginTransaction())
                             {
-                                // Check Exec SQL - ERRO
-                                throw new System.ArgumentException("Erro Exec SQL (00003) Erro", "Metodo ExecuteSQLReturnDataTable()");
+                                var count_I = (0);
+                                count_I = adapterSQL.Fill(myReturn);
+                                SQLiteTransactionBegin.Commit();
+                                if (count_I == (-1))
+                                {
+                                    // Check Exec SQL - ERRO
+                                    throw new System.ArgumentException("Erro Exec SQL (00003) Erro", "Metodo ExecuteSQLReturnDataTable()");
+                                };
                             };
-                            SQLiteConn.Close();
                         };
                     };
                 };
@@ -262,7 +269,7 @@ namespace HOYLER.Data.SQLite
         /// #H Metodo CreateFileDBDefault - Criar Default Banco de Dados e Armazenar as Configuraçoes
         /// </summary>
         /// <returns>Retorna Status</returns>
-        public static string CreateFileDBDefault()
+        public static String CreateFileDBDefault()
         {
             //Default Return
             var myReturn = (String.Empty);
@@ -290,7 +297,7 @@ namespace HOYLER.Data.SQLite
         /// </summary>
         /// <param name="myParametroSQL">String como Parametros</param>
         /// <returns>Retorna Status</returns>
-        public static string SQLExecuteNonQueryDefault(String myParametroSQL)
+        public static String SQLExecuteNonQueryDefault(String myParametroSQL)
         {
             //Default Return
             var myReturn = (String.Empty);
@@ -306,8 +313,8 @@ namespace HOYLER.Data.SQLite
                 @SetStringBuilder2_Password = (Passwd),
             };
             myReturn = (HOYLER.Data.SQLite.H_SQLiteDatabase.SQLExecuteNonQuery(
-                                                                               @myParametros: myParametros,
-                                                                               @myParametroSQL: myParametroSQL
+                                                                                 @myParametros: myParametros,
+                                                                                 @myParametroSQL: myParametroSQL
                                                                                ));
             //Retorno do metodo
             return (myReturn);

@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS [DatabaseBackup];
 DROP TABLE IF EXISTS [DatabaseBackupMode];
 DROP TABLE IF EXISTS [DatabaseBackupServer];
 
-CREATE TABLE IF NOT EXISTS[DatabaseBackupServer](
+CREATE TABLE IF NOT EXISTS [DatabaseBackupServer](
   [DBBackupServer_ID]       integer PRIMARY KEY AUTOINCREMENT,
   [DBBackupServer_Name]     varchar(50) NOT NULL,
   [DBBackupServer_DescBR]   varchar(50) NOT NULL,
@@ -16,7 +16,7 @@ VALUES
 ('Access', 'Access é um banco de dados SQL Microsoft', 'Access is an SQL database Microsoft'),
 ('Oracle', 'Oracle é um banco de dados SQL Oracle', 'Oracle is an SQL database Oracle');
  
-
+---SELECT * FROM [DatabaseBackupServer];
 CREATE TABLE [DatabaseBackupMode](
   [DBBackupMode_ID]       integer PRIMARY KEY AUTOINCREMENT,
   [DBBackupServer_ID]     integer NOT NULL,

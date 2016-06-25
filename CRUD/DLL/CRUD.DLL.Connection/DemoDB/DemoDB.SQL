@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS [DatabaseBackupServer](
   [DBBackupServer_DescBR]   varchar(50) NOT NULL,
   [DBBackupServer_DescEN]   varchar(50) NOT NULL  
 );
+
 INSERT INTO [DatabaseBackupServer] ([DBBackupServer_Name], [DBBackupServer_DescBR], [DBBackupServer_DescEN])
 VALUES
 ('SQLite', 'SQLite é um motor de banco de dados SQL embutido', 'SQLite is an embedded SQL database engine'),
@@ -15,8 +16,7 @@ VALUES
 ('MySQL', 'MySQL é um banco de dados SQL Oracle', 'MySQL is an SQL database Oracle'),
 ('Access', 'Access é um banco de dados SQL Microsoft', 'Access is an SQL database Microsoft'),
 ('Oracle', 'Oracle é um banco de dados SQL Oracle', 'Oracle is an SQL database Oracle');
- 
----SELECT * FROM [DatabaseBackupServer];
+
 CREATE TABLE [DatabaseBackupMode](
   [DBBackupMode_ID]       integer PRIMARY KEY AUTOINCREMENT,
   [DBBackupServer_ID]     integer NOT NULL,

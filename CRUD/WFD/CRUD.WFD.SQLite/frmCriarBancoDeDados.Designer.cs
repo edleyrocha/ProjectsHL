@@ -42,11 +42,11 @@
             this.btn_ir_Backup = new System.Windows.Forms.Button();
             this.textBox_CaminhoBackup = new System.Windows.Forms.TextBox();
             this.btn_CriarDefaultDB = new System.Windows.Forms.Button();
-            this.btn_ExecuteDefaultComman = new System.Windows.Forms.Button();
+            this.btn_ExecuteDefaultCommand = new System.Windows.Forms.Button();
             this.grv_Principal = new System.Windows.Forms.DataGridView();
-            this.btn_ExecComGrid = new System.Windows.Forms.Button();
+            this.btn_ExecCommDataSetGrid = new System.Windows.Forms.Button();
             this.rtb_CommandSQL = new System.Windows.Forms.RichTextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btn_ExecCommDataTableGrid = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grv_Principal)).BeginInit();
@@ -195,15 +195,15 @@
             this.btn_CriarDefaultDB.UseVisualStyleBackColor = true;
             this.btn_CriarDefaultDB.Click += new System.EventHandler(this.btn_CriarDefaultDB_Click);
             // 
-            // btn_ExecuteDefaultComman
+            // btn_ExecuteDefaultCommand
             // 
-            this.btn_ExecuteDefaultComman.Location = new System.Drawing.Point(272, 288);
-            this.btn_ExecuteDefaultComman.Name = "btn_ExecuteDefaultComman";
-            this.btn_ExecuteDefaultComman.Size = new System.Drawing.Size(264, 23);
-            this.btn_ExecuteDefaultComman.TabIndex = 6;
-            this.btn_ExecuteDefaultComman.Text = "Execute Non Query Command";
-            this.btn_ExecuteDefaultComman.UseVisualStyleBackColor = true;
-            this.btn_ExecuteDefaultComman.Click += new System.EventHandler(this.btn_ExecuteDefaultComman_Click);
+            this.btn_ExecuteDefaultCommand.Location = new System.Drawing.Point(272, 288);
+            this.btn_ExecuteDefaultCommand.Name = "btn_ExecuteDefaultCommand";
+            this.btn_ExecuteDefaultCommand.Size = new System.Drawing.Size(264, 23);
+            this.btn_ExecuteDefaultCommand.TabIndex = 6;
+            this.btn_ExecuteDefaultCommand.Text = "Execute Non Query Command";
+            this.btn_ExecuteDefaultCommand.UseVisualStyleBackColor = true;
+            this.btn_ExecuteDefaultCommand.Click += new System.EventHandler(this.btn_ExecuteDefaultCommand_Click);
             // 
             // grv_Principal
             // 
@@ -216,15 +216,15 @@
             this.grv_Principal.Size = new System.Drawing.Size(396, 126);
             this.grv_Principal.TabIndex = 7;
             // 
-            // btn_ExecComGrid
+            // btn_ExecCommDataSetGrid
             // 
-            this.btn_ExecComGrid.Location = new System.Drawing.Point(272, 317);
-            this.btn_ExecComGrid.Name = "btn_ExecComGrid";
-            this.btn_ExecComGrid.Size = new System.Drawing.Size(264, 23);
-            this.btn_ExecComGrid.TabIndex = 8;
-            this.btn_ExecComGrid.Text = "Execute Command Dataset Return Grid";
-            this.btn_ExecComGrid.UseVisualStyleBackColor = true;
-            this.btn_ExecComGrid.Click += new System.EventHandler(this.btn_ExecComGrid_Click);
+            this.btn_ExecCommDataSetGrid.Location = new System.Drawing.Point(272, 317);
+            this.btn_ExecCommDataSetGrid.Name = "btn_ExecCommDataSetGrid";
+            this.btn_ExecCommDataSetGrid.Size = new System.Drawing.Size(264, 23);
+            this.btn_ExecCommDataSetGrid.TabIndex = 8;
+            this.btn_ExecCommDataSetGrid.Text = "Execute Command Dataset Return Grid";
+            this.btn_ExecCommDataSetGrid.UseVisualStyleBackColor = true;
+            this.btn_ExecCommDataSetGrid.Click += new System.EventHandler(this.btn_ExecCommDataSetGrid_Click);
             // 
             // rtb_CommandSQL
             // 
@@ -235,26 +235,26 @@
             this.rtb_CommandSQL.TabIndex = 9;
             this.rtb_CommandSQL.Text = "";
             // 
-            // button1
+            // btn_ExecCommDataTableGrid
             // 
-            this.button1.Location = new System.Drawing.Point(272, 346);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(264, 23);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Execute Command DataTable Return Grid";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btn_ExecCommDataTableGrid.Location = new System.Drawing.Point(272, 346);
+            this.btn_ExecCommDataTableGrid.Name = "btn_ExecCommDataTableGrid";
+            this.btn_ExecCommDataTableGrid.Size = new System.Drawing.Size(264, 23);
+            this.btn_ExecCommDataTableGrid.TabIndex = 10;
+            this.btn_ExecCommDataTableGrid.Text = "Execute Command DataTable Return Grid";
+            this.btn_ExecCommDataTableGrid.UseVisualStyleBackColor = true;
+            this.btn_ExecCommDataTableGrid.Click += new System.EventHandler(this.btn_ExecCommDataTableGrid_Click);
             // 
             // frmCriarBancoDeDados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(678, 389);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btn_ExecCommDataTableGrid);
             this.Controls.Add(this.rtb_CommandSQL);
-            this.Controls.Add(this.btn_ExecComGrid);
+            this.Controls.Add(this.btn_ExecCommDataSetGrid);
             this.Controls.Add(this.grv_Principal);
-            this.Controls.Add(this.btn_ExecuteDefaultComman);
+            this.Controls.Add(this.btn_ExecuteDefaultCommand);
             this.Controls.Add(this.btn_CriarDefaultDB);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -287,11 +287,11 @@
         private System.Windows.Forms.Button btn_ir_Backup;
         private System.Windows.Forms.TextBox textBox_CaminhoBackup;
         private System.Windows.Forms.Button btn_CriarDefaultDB;
-        private System.Windows.Forms.Button btn_ExecuteDefaultComman;
+        private System.Windows.Forms.Button btn_ExecuteDefaultCommand;
         private System.Windows.Forms.DataGridView grv_Principal;
-        private System.Windows.Forms.Button btn_ExecComGrid;
+        private System.Windows.Forms.Button btn_ExecCommDataSetGrid;
         private System.Windows.Forms.RichTextBox rtb_CommandSQL;
         private System.Windows.Forms.ComboBox cBox_TipoBackup;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_ExecCommDataTableGrid;
     }
 }

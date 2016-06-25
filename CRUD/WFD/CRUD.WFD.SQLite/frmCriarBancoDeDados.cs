@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using HOYLER.Data.SQLite;
+using System.IO;
 
 
 namespace CRUD.WFD.SQLite
@@ -172,25 +173,7 @@ namespace CRUD.WFD.SQLite
 
         private void btn_CriarDefaultDB_Click(object sender, EventArgs e)
         {
-            var resultCreate = (HOYLER.Data.SQLite.H_SQLiteDatabase.CreateFileDBDefault());
-            var msgTitle = ("Banco de Dados");
-            var msgText = ("Criado com Sucesso");
-            if (resultCreate == "OK")
-            {
-                MessageBox.Show(msgText, msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                MessageBox.Show(resultCreate, msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void btn_ExecuteDefaultComman_Click(object sender, EventArgs e)
-        {
-            var ParametroSQL = (rtb_CommandSQL.Text);
-            ParametroSQL = (ParametroSQL.Replace("\t", "").Trim());
-            ParametroSQL = (ParametroSQL.Replace("\n", "").Trim());
-            var resultCreate = (HOYLER.Data.SQLite.H_SQLiteDatabase.SQLExecuteNonQueryDefault(myParametroSQL: ParametroSQL));
+            var resultCreate = (H_SQLiteDatabaseDefault.CreateFileDBDefault());
             var msgTitle = ("Banco de Dados");
             var msgText = ("Criado com Sucesso");
             if (resultCreate == "OK")
@@ -203,63 +186,74 @@ namespace CRUD.WFD.SQLite
             };
         }
 
-        private void btn_ExecComGrid_Click(object sender, EventArgs e)
+        private void btn_ExecuteDefaultCommand_Click(object sender, EventArgs e)
         {
             var ParametroSQL = (rtb_CommandSQL.Text);
-            var DirectoryName = (System.IO.Directory.GetCurrentDirectory());
-            var DirectoryName_FileName = (System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
-            var FileNameSemExtencao = (System.IO.Path.GetFileNameWithoutExtension(DirectoryName_FileName));
-            var Extencao = (".db3");
-            var FileNameComExtencao = (System.IO.Path.Combine((DirectoryName), ((FileNameSemExtencao) + (Extencao))));
-            var Passwd = ("balada");
-            H_SQLiteConnectionStringBuilder Parametros = (new H_SQLiteConnectionStringBuilder()
+            var resultCreate = (H_SQLiteDatabaseDefault.SQLExecuteNonQueryDefault(@myParametroSQL: ParametroSQL));
+            var msgTitle = ("Banco de Dados");
+            var msgText = ("Sucesso");
+            if (resultCreate == "OK")
             {
-                @SetStringBuilder1_DataSource = (FileNameComExtencao),
-                @SetStringBuilder2_Password = (Passwd)
-            });
-            var ParametroSaida = (String.Empty);
-            var ds = (HOYLER.Data.SQLite.H_SQLiteDatabase.ExecuteSQLReturnDataset
-                     (
-                     @myParametros: Parametros,
-                     @myParametroSQL: ParametroSQL,
-                     @myParametroSaida: ref ParametroSaida
-                     ));
+                MessageBox.Show(msgText, msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show(resultCreate, msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            };
+        }
+
+        private void btn_ExecCommDataSetGrid_Click(object sender, EventArgs e)
+        {
+            var myParametroSQL = (rtb_CommandSQL.Text);
+            var myParametroSaida = (String.Empty);
+            var ds = (H_SQLiteDatabaseDefault.ExecuteSQLReturnDatasetDefault(@myParametroSQL: myParametroSQL, @myParametroSaida: ref myParametroSaida));
             int numero = (ds.Tables.Count);
             if (numero >= 1)
             {
                 grv_Principal.DataSource = (ds.Tables[0]);
+            }
+            else if (numero == 0)
+            {
+                grv_Principal.DataSource = null;
+            }
+            var msgTitle = ("Banco de Dados");
+            var msgText = ("Sucesso");
+            if (myParametroSaida == "OK")
+            {
+                MessageBox.Show(msgText, msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show(myParametroSaida, msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
             };
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btn_ExecCommDataTableGrid_Click(object sender, EventArgs e)
         {
-            var ParametroSQL = (rtb_CommandSQL.Text);
-            var DirectoryName = (System.IO.Directory.GetCurrentDirectory());
-            var DirectoryName_FileName = (System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
-            var FileNameSemExtencao = (System.IO.Path.GetFileNameWithoutExtension(DirectoryName_FileName));
-            var Extencao = (".db3");
-            var FileNameComExtencao = (System.IO.Path.Combine((DirectoryName), ((FileNameSemExtencao) + (Extencao))));
-            var Passwd = ("balada");
-            H_SQLiteConnectionStringBuilder Parametros = (new H_SQLiteConnectionStringBuilder()
-            {
-                @SetStringBuilder1_DataSource = (FileNameComExtencao),
-                @SetStringBuilder2_Password = (Passwd)
-            });
-            var ParametroSaida = (String.Empty);
-            var dt = (HOYLER.Data.SQLite.H_SQLiteDatabase.ExecuteSQLReturnDataTable
-                     (
-                     @myParametros: Parametros,
-                     @myParametroSQL: ParametroSQL,
-                     @myParametroSaida: ref ParametroSaida
-                     ));
+            var myParametroSQL = (rtb_CommandSQL.Text);
+            var myParametroSaida = (String.Empty);
+            var dt = (H_SQLiteDatabaseDefault.ExecuteSQLReturnDataTableDefault(@myParametroSQL: myParametroSQL, @myParametroSaida: ref myParametroSaida));
             if (dt != null)
             {
                 if (dt.Rows.Count >= 1)
                 {
                     grv_Principal.DataSource = (dt);
                 }
+                else if (dt.Rows.Count == 1)
+                {
+                    grv_Principal.DataSource = null;
+                }
             }
- 
+            var msgTitle = ("Banco de Dados");
+            var msgText = ("Sucesso");
+            if (myParametroSaida == "OK")
+            {
+                MessageBox.Show(msgText, msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show(myParametroSaida, msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            };
         }
     }
 }

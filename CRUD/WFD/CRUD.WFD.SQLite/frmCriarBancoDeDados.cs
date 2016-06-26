@@ -145,8 +145,7 @@ namespace CRUD.WFD.SQLite
             var resultCreate = (HOYLER.Data.SQLite.H_SQLiteDatabase.CreateFileDB(myParametros: Parametros));
             var msgTitle = ("Banco de Dados");
             var msgText = ("Criado com Sucesso");
-
-
+            
             if (resultCreate == "OK")
             {
                 MessageBox.Show(msgText, msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -84,7 +84,6 @@ namespace HOYLER.Data.SQLite
             //Retorno do metodo
             return (myReturn_String);
         }
-
         /// <summary>
         /// #H Metodo ExecuteSQLReturnDatasetDefault() - Roda Somente no Banco Default
         /// </summary>

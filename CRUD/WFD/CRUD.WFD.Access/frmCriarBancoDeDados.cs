@@ -14,15 +14,44 @@ namespace CRUD.WFD.Access
     {
         public frmCriarBancoDeDados()
         {
-            InitializeComponent();
+            this.InitializeComponent();
+            this.CheckSenhaTxT(@myStatus: checkBox_Senha.Checked);
+            this.CheckCaminhoTxT(@myCaminho: checkBox_Caminho.Checked);
         }
-
+        private void CheckSenhaTxT(Boolean myStatus)
+        {
+            this.textBox_Senha.Enabled = (myStatus);
+        }
+        private void CheckCaminhoTxT(Boolean myCaminho)
+        {
+            this.textBox_Caminho.Enabled = (myCaminho);
+            this.btn_Buscar.Enabled = (myCaminho);
+            this.btn_CriarBanco.Enabled = (myCaminho);
+        }
+        private void checkBox_Senha_CheckedChanged(object sender, EventArgs e)
+        {
+            this.CheckSenhaTxT(@myStatus: checkBox_Senha.Checked);
+        }
+        private void checkBox_Caminho_CheckedChanged(object sender, EventArgs e)
+        {
+            this.CheckCaminhoTxT(@myCaminho: checkBox_Caminho.Checked);
+        }
         private void btn_CriarBanco_Click(object sender, EventArgs e)
         {
-            var myPatchDB = (textBox_CaminhoCriar.Text);
+            var myPatchDB = (textBox_Caminho.Text);
             var Passwd = (textBox_Senha.Text);
 
-            var resultCreate = (H_AccessDatabase.CreateFileDB(@myPatchDB: myPatchDB));
+            var resultCreate = (String.Empty);
+
+            if (textBox_Senha.Enabled == true)
+            {
+                resultCreate = (H_AccessDatabase.CreateFileDBClean(@myPatchDB: myPatchDB, @myPassword: Passwd));
+            }
+            else if (textBox_Senha.Enabled == false)
+            {
+                resultCreate = (H_AccessDatabase.CreateFileDBClean(@myPatchDB: myPatchDB));
+            };
+           
             var msgTitle = ("Banco de Dados");
             var msgText = ("Criado com Sucesso");
 
@@ -33,7 +62,7 @@ namespace CRUD.WFD.Access
             else
             {
                 MessageBox.Show(resultCreate, msgTitle, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            };
         }
     }
 }

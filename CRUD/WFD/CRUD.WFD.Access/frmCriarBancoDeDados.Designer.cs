@@ -29,22 +29,22 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btn_BuscarBanco = new System.Windows.Forms.Button();
+            this.btn_Buscar = new System.Windows.Forms.Button();
             this.checkBox_Caminho = new System.Windows.Forms.CheckBox();
             this.checkBox_Senha = new System.Windows.Forms.CheckBox();
             this.textBox_Senha = new System.Windows.Forms.TextBox();
-            this.textBox_CaminhoCriar = new System.Windows.Forms.TextBox();
+            this.textBox_Caminho = new System.Windows.Forms.TextBox();
             this.btn_CriarBanco = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btn_BuscarBanco);
+            this.groupBox1.Controls.Add(this.btn_Buscar);
             this.groupBox1.Controls.Add(this.checkBox_Caminho);
             this.groupBox1.Controls.Add(this.checkBox_Senha);
             this.groupBox1.Controls.Add(this.textBox_Senha);
-            this.groupBox1.Controls.Add(this.textBox_CaminhoCriar);
+            this.groupBox1.Controls.Add(this.textBox_Caminho);
             this.groupBox1.Controls.Add(this.btn_CriarBanco);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
@@ -53,14 +53,14 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Criar DB";
             // 
-            // btn_BuscarBanco
+            // btn_Buscar
             // 
-            this.btn_BuscarBanco.Location = new System.Drawing.Point(220, 42);
-            this.btn_BuscarBanco.Name = "btn_BuscarBanco";
-            this.btn_BuscarBanco.Size = new System.Drawing.Size(20, 20);
-            this.btn_BuscarBanco.TabIndex = 10;
-            this.btn_BuscarBanco.Text = "ir";
-            this.btn_BuscarBanco.UseVisualStyleBackColor = true;
+            this.btn_Buscar.Location = new System.Drawing.Point(220, 42);
+            this.btn_Buscar.Name = "btn_Buscar";
+            this.btn_Buscar.Size = new System.Drawing.Size(20, 20);
+            this.btn_Buscar.TabIndex = 10;
+            this.btn_Buscar.Text = "ir";
+            this.btn_Buscar.UseVisualStyleBackColor = true;
             // 
             // checkBox_Caminho
             // 
@@ -71,6 +71,7 @@
             this.checkBox_Caminho.TabIndex = 9;
             this.checkBox_Caminho.Text = "Definir Caminho C:\\Access.accdb";
             this.checkBox_Caminho.UseVisualStyleBackColor = true;
+            this.checkBox_Caminho.CheckedChanged += new System.EventHandler(this.checkBox_Caminho_CheckedChanged);
             // 
             // checkBox_Senha
             // 
@@ -81,6 +82,7 @@
             this.checkBox_Senha.TabIndex = 8;
             this.checkBox_Senha.Text = "Definir Senha";
             this.checkBox_Senha.UseVisualStyleBackColor = true;
+            this.checkBox_Senha.CheckedChanged += new System.EventHandler(this.checkBox_Senha_CheckedChanged);
             // 
             // textBox_Senha
             // 
@@ -90,13 +92,13 @@
             this.textBox_Senha.TabIndex = 2;
             this.textBox_Senha.Text = "Senha";
             // 
-            // textBox_CaminhoCriar
+            // textBox_Caminho
             // 
-            this.textBox_CaminhoCriar.Location = new System.Drawing.Point(7, 42);
-            this.textBox_CaminhoCriar.Name = "textBox_CaminhoCriar";
-            this.textBox_CaminhoCriar.Size = new System.Drawing.Size(207, 20);
-            this.textBox_CaminhoCriar.TabIndex = 2;
-            this.textBox_CaminhoCriar.Text = "C:\\Access\\Access.accdb";
+            this.textBox_Caminho.Location = new System.Drawing.Point(7, 42);
+            this.textBox_Caminho.Name = "textBox_Caminho";
+            this.textBox_Caminho.Size = new System.Drawing.Size(207, 20);
+            this.textBox_Caminho.TabIndex = 2;
+            this.textBox_Caminho.Text = "C:\\Access\\Access.accdb";
             // 
             // btn_CriarBanco
             // 
@@ -115,6 +117,7 @@
             this.ClientSize = new System.Drawing.Size(618, 393);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmCriarBancoDeDados";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DEMO Criar Banco de Dados Exemplo";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -125,11 +128,11 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btn_BuscarBanco;
+        private System.Windows.Forms.Button btn_Buscar;
         private System.Windows.Forms.CheckBox checkBox_Caminho;
         private System.Windows.Forms.CheckBox checkBox_Senha;
         private System.Windows.Forms.TextBox textBox_Senha;
-        private System.Windows.Forms.TextBox textBox_CaminhoCriar;
+        private System.Windows.Forms.TextBox textBox_Caminho;
         private System.Windows.Forms.Button btn_CriarBanco;
     }
 }

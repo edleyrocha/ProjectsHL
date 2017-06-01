@@ -95,17 +95,17 @@ namespace HOYLER.Data.SQLite
                         };
                     case (EscolhaTipo.Backup):
                         {
-                            var myPasswd = (myPassword);
+                            var myPasswdHex = (HOYLER.Data.SQLite.H_SQLiteDatabaseHexPassword.GetBytes(myPassword));
                             var StringBuilderSource = new H_SQLiteConnectionStringBuilder()
                             {
                                 @SetStringBuilder1_DataSource = (myDataSource),
-                                @SetStringBuilder2_Password = (myPasswd),
+                                @SetStringBuilder2_HexPassword = (myPasswdHex),
                                 @SetStringBuilder4_ReadOnly = (true)
                             };
                             var StringBuilderDestination = new H_SQLiteConnectionStringBuilder()
                             {
                                 @SetStringBuilder1_DataSource = (destinationFileName),
-                                @SetStringBuilder2_Password = (myPasswd),
+                                @SetStringBuilder2_HexPassword = (myPasswdHex),
                                 @SetStringBuilder3_FailIfMissing = (false)
                             };
                             using (var SQLiteConnSource = (new System.Data.SQLite.SQLiteConnection(StringBuilderSource.GetStringBuilder.ConnectionString)))

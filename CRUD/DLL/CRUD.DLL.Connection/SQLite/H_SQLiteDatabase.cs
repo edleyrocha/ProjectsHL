@@ -48,13 +48,13 @@ namespace HOYLER.Data.SQLite
                 if (!Directory.Exists(DirectoryName))
                 {
                     // Check DirectoryName Exists - ERRO
-                    throw new ArgumentException("Erro DirectoryName Name (00001) NOT Exists", "Metodo CreateFileDB()");
+                    throw new ArgumentException("\nErro DirectoryName Name NOT Exists [00001] \n" + DirectoryName, "Metodo CreateFileDB()");
                 };
                 // Check File Exists 
                 if (File.Exists(FilePatch))
                 {
                     // Check File Exists - ERRO
-                    throw new ArgumentException("Erro File Name (00002) Exists", "Metodo CreateFileDB()");
+                    throw new ArgumentException("\nErro File Name Exists [00002] \n" + FilePatch, "Metodo CreateFileDB()");
                 };
                 // Cria Banco de Dados
                 using (var SQLiteConn = (new SQLiteConnection(myParametros.GetStringBuilder.ConnectionString)))
@@ -67,7 +67,7 @@ namespace HOYLER.Data.SQLite
                 if (!File.Exists(FilePatch))
                 {
                     // Check File NOT Exists - ERRO
-                    throw new ArgumentException("Erro File Name (00003) NOT Exists", "Metodo CreateFileDB()");
+                    throw new ArgumentException("Erro File Name NOT Exists [00003] \n" + FilePatch, "Metodo CreateFileDB()");
                 };
                 // Returno de Sucesso
                 myReturn_String = (String.Format(("{0}"), ("OK")));
@@ -99,13 +99,13 @@ namespace HOYLER.Data.SQLite
                 if (!Directory.Exists(DirectoryName))
                 {
                     // Check DirectoryName Exists - ERRO
-                    throw new ArgumentException("Erro DirectoryName Name (00001) NOT Exists", "Metodo SQLExecuteNonQuery()");
+                    throw new ArgumentException("\n Erro DirectoryName Name NOT Exists [00001]\n" + DirectoryName, "Metodo SQLExecuteNonQuery()");
                 };
                 // Check File NOT Exists 
                 if (!File.Exists(FilePatch))
                 {
                     // Check File Exists - ERRO
-                    throw new ArgumentException("Erro File Name (00002) NOT Exists", "Metodo SQLExecuteNonQuery()");
+                    throw new ArgumentException("\nErro File Name NOT Exists  [00002]\n" + FilePatch, "Metodo SQLExecuteNonQuery()");
                 };
                 // Abrir Banco de Dados
                 using (var SQLiteConn = (new SQLiteConnection(myParametros.GetStringBuilder.ConnectionString)))
@@ -125,7 +125,7 @@ namespace HOYLER.Data.SQLite
                         if (count_I == (-1))
                         {
                             // Check Exec SQL - ERRO
-                            throw new ArgumentException("Erro Exec SQL (00003) Erro", "Metodo SQLExecuteNonQuery()");
+                            throw new ArgumentException("Erro Exec SQL Erro  [00003]", "Metodo SQLExecuteNonQuery()");
                         };
                         // Returno de Sucesso
                         myReturn_String = (String.Format(("{0}"), ("OK")));
@@ -160,13 +160,13 @@ namespace HOYLER.Data.SQLite
                 if (!Directory.Exists(DirectoryName))
                 {
                     // Check DirectoryName Exists - ERRO
-                    throw new ArgumentException("Erro DirectoryName Name (00001) NOT Exists", "Metodo ExecuteSQLReturnDataset()");
+                    throw new ArgumentException("Erro DirectoryName Name NOT Exists [00001]", "Metodo ExecuteSQLReturnDataset()");
                 };
                 // Check File NOT Exists 
                 if (!File.Exists(FilePatch))
                 {
                     // Check File Exists - ERRO
-                    throw new ArgumentException("Erro File Name (00002) NOT Exists", "Metodo ExecuteSQLReturnDataset()");
+                    throw new ArgumentException("Erro File Name NOT Exists [00002]", "Metodo ExecuteSQLReturnDataset()");
                 };
                 // Abrir Banco de Dados
                 using (var SQLiteConn = (new SQLiteConnection(myParametros.GetStringBuilder.ConnectionString)))
@@ -187,7 +187,7 @@ namespace HOYLER.Data.SQLite
                                 if (count_I == (-1))
                                 {
                                     // Check Exec SQL - ERRO
-                                    throw new ArgumentException("Erro Exec SQL (00003) Erro", "Metodo ExecuteSQLReturnDataset()");
+                                    throw new ArgumentException("Erro Exec SQL Erro [00003]", "Metodo ExecuteSQLReturnDataset()");
                                 };
                                 myParametroSaida = (String.Format(("{0}"), ("OK")));
                             };
@@ -223,13 +223,13 @@ namespace HOYLER.Data.SQLite
                 if (!Directory.Exists(DirectoryName))
                 {
                     // Check DirectoryName Exists - ERRO
-                    throw new ArgumentException("Erro DirectoryName Name (00001) NOT Exists", "Metodo ExecuteSQLReturnDataTable()");
+                    throw new ArgumentException("Erro DirectoryName Name NOT Exists [00001]", "Metodo ExecuteSQLReturnDataTable()");
                 };
                 // Check File NOT Exists 
                 if (!File.Exists(FilePatch))
                 {
                     // Check File Exists - ERRO
-                    throw new ArgumentException("Erro File Name (00002) NOT Exists", "Metodo ExecuteSQLReturnDataTable()");
+                    throw new ArgumentException("Erro File Name NOT Exists [00002]", "Metodo ExecuteSQLReturnDataTable()");
                 };
                 // Abrir Banco de Dados
                 using (var SQLiteConn = (new SQLiteConnection(myParametros.GetStringBuilder.ConnectionString)))
@@ -250,7 +250,7 @@ namespace HOYLER.Data.SQLite
                                 if (count_I == (-1))
                                 {
                                     // Check Exec SQL - ERRO
-                                    throw new ArgumentException("Erro Exec SQL (00003) Erro", "Metodo ExecuteSQLReturnDataTable()");
+                                    throw new ArgumentException("Erro Exec SQL Erro [00003]", "Metodo ExecuteSQLReturnDataTable()");
                                 };
                                 myParametroSaida = (String.Format(("{0}"), ("OK")));
                             };
